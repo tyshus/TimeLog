@@ -51,8 +51,7 @@ public class ContactList extends WindowList {
 	void editEntry() {
 		Contact contact = (Contact) tableView.getSelectionModel().getSelectedItem();
 		if (contact != null) {
-			ContactEntry contactEntry = new ContactEntry();
-			contactEntry.setCustomer(contact);
+			new ContactEntry(contact);
 		} else {
 			model.msgW("No contact selected!");
 		}

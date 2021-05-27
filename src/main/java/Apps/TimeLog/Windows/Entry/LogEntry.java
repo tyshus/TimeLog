@@ -178,7 +178,7 @@ public class LogEntry {
 
 	public void loadContacts() {
 		contactCBox.getItems().clear();
-		contactCBox.getItems().addAll(model.loadContacNametList(companyCBox.getValue()));
+		contactCBox.getItems().addAll(model.loadContacts(companyCBox.getValue()));
 		contactCBox.getSelectionModel().selectFirst();
 	}
 

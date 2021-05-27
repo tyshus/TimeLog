@@ -17,12 +17,19 @@ public class ContactEntry extends WindowEntry {
 	private CheckBox manager = new CheckBox("Manager");
 	private Contact contact = new Contact();
 
+	public ContactEntry(Contact contact) {
+		this.setScene();
+		this.setContact(contact);
+	}
+
 	public ContactEntry() {
+		this.setScene();
+		this.setDefaults();
+	}
+
+	private void setScene() {
 		stage.setTitle("Contact");
 		emailtype.getItems().addAll("not sent", "To", "Cc", "Bcc");
-		emailtype.getSelectionModel().selectFirst();
-		company.getItems().addAll(model.loadCompanies());
-		company.getSelectionModel().selectFirst();
 		grid.add(new Label("Company: "), 0, 0);
 		grid.add(company, 1, 0);
 		grid.add(new Label("Contact code: "), 0, 1);
@@ -38,6 +45,12 @@ public class ContactEntry extends WindowEntry {
 		grid.add(manager, 1, 5);
 		grid.add(saveBtn, 0, 6);
 		id.setEditable(false);
+	}
+
+	private void setDefaults() {
+		emailtype.getSelectionModel().selectFirst();
+		company.getItems().addAll(model.loadCompanies());
+		company.getSelectionModel().selectFirst();
 	}
 
 	void save() {
@@ -56,7 +69,7 @@ public class ContactEntry extends WindowEntry {
 		stage.close();
 	}
 
-	public void setCustomer(Contact contact) {
+	public void setContact(Contact contact) {
 		this.contact = contact;
 		id.SetLong(contact.getId());
 		company.getSelectionModel().select(contact.getCompany());

@@ -10,6 +10,7 @@ import Apps.TimeLog.Tools.PropertyLoader;
 import java.io.File;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Collections;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -66,14 +67,14 @@ public class Model {
 	}
 
 	public Company getCompany(String id) {
-		if (em != null) {
+		if (em == null) {
 			return null;
 		}
 		return em.find(Company.class, id);
 	}
 
 	public Invoice getInvoice(String serno) {
-		if (em != null) {
+		if (em == null) {
 			return null;
 		}
 		return em.find(Invoice.class, serno);
@@ -81,53 +82,38 @@ public class Model {
 
 	@SuppressWarnings("unchecked")
 	public List<Contact> loadContactList() {
-		if (em != null) {
-			return null;
+		if (em == null) {
+			return Collections.emptyList();
 		}
 		return (List<Contact>) em.createQuery("FROM contacts").getResultList();
 	}
 
 	@SuppressWarnings("unchecked")
 	public List<Company> loadCompanyList() {
-		if (em != null) {
-			return null;
+		if (em == null) {
+			return Collections.emptyList();
 		}
 		return (List<Company>) em.createQuery("FROM companies").getResultList();
 	}
 
 	@SuppressWarnings("unchecked")
 	public List<Invoice> loadInvoiceList() {
-		if (em != null) {
-			return null;
+		if (em == null) {
+			return Collections.emptyList();
 		}
 		return (List<Invoice>) em.createQuery("FROM invoices").getResultList();
 	}
 
 	@SuppressWarnings("unchecked")
 	public List<Mail> loadMailList() {
-		if (em != null) {
-			return null;
+		if (em == null) {
+			return Collections.emptyList();
 		}
 		return (List<Mail>) em.createQuery("FROM mails").getResultList();
 	}
 
-	public ObservableList<String> loadContacNametList(String company) {
-		if (em != null) {
-			return null;
-		}
-		ObservableList<String> result = FXCollections.observableArrayList();
-		@SuppressWarnings("unchecked")
-		List<Contact> list = (List<Contact>) em.createQuery("FROM contacts WHERE company = :cpy")
-				.setParameter("cpy", company).getResultList();
-		for (Contact temp : list) {
-			result.add(temp.getName());
-		}
-
-		return result;
-	}
-
 	public String getEmails(String company, String type) {
-		if (em != null) {
+		if (em == null) {
 			return null;
 		}
 		String emails = "";
@@ -144,26 +130,40 @@ public class Model {
 
 	@SuppressWarnings("unchecked")
 	public List<TimeLog> loadReportData(String company, LocalDate sdat, LocalDate edat) {
-		if (em != null) {
-			return null;
+		if (em == null) {
+			return Collections.emptyList();
 		}
 		return (List<TimeLog>) em
 				.createQuery("FROM timelogs WHERE company = :cpy and logdate >= :sdat and logdate <= :edat")
 				.setParameter("cpy", company).setParameter("sdat", sdat).setParameter("edat", edat).getResultList();
+	}
 
+	public ObservableList<String> loadContacts(String company) {
+		ObservableList<String> observableList = FXCollections.observableArrayList();
+		if (em == null) {
+			return observableList;
+		}
+
+		@SuppressWarnings("unchecked")
+		List<Contact> list = (List<Contact>) em.createQuery("FROM contacts WHERE company = :cpy")
+				.setParameter("cpy", company).getResultList();
+		for (Contact temp : list) {
+			observableList.add(temp.getName());
+		}
+		return observableList;
 	}
 
 	public ObservableList<String> loadCompanies() {
-		if (em != null) {
-			return null;
+		ObservableList<String> observableList = FXCollections.observableArrayList();
+		if (em == null) {
+			return observableList;
 		}
-		ObservableList<String> result = FXCollections.observableArrayList();
 		@SuppressWarnings("unchecked")
 		List<Company> list = (List<Company>) em.createQuery("from companies").getResultList();
 		for (Company temp : list) {
-			result.add(temp.getId());
+			observableList.add(temp.getId());
 		}
-		return result;
+		return observableList;
 	}
 
 	public Runnable addRefreshCallback(Runnable callback) {
