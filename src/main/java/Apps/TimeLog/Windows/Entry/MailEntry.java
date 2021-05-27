@@ -5,7 +5,7 @@ import java.time.LocalDate;
 import Apps.TimeLog.Models.Invoice;
 import Apps.TimeLog.Models.Mail;
 import Apps.TimeLog.Tools.SendMail;
-import Apps.TimeLog.Windows.NumberTextField;
+import Apps.TimeLog.Windows.Fields.NumberTextField;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.DatePicker;
@@ -31,7 +31,7 @@ public class MailEntry extends WindowEntry {
 		stage.setTitle("Mail");
 
 		sendBtn.setOnAction(value -> {
-			SendeMail();
+			sendEmail();
 		});
 
 		date.setValue(LocalDate.now());
@@ -68,7 +68,7 @@ public class MailEntry extends WindowEntry {
 		stage.setHeight(450);
 	}
 
-	private void SendeMail() {
+	private void sendEmail() {
 		SendMail sendMail = new SendMail();
 		if (sendMail.send(mail)) {
 			mail.setSent(true);
@@ -76,7 +76,7 @@ public class MailEntry extends WindowEntry {
 			model.refresh();
 			sendBtn.setDisable(true);
 			if (mail.getSourcetype() == "inv") {
-				Invoice invoice = model.GetInvoice(mail.getSourceid());
+				Invoice invoice = model.getInvoice(mail.getSourceid());
 				invoice.setSent(true);
 				model.merge(invoice);
 			}
@@ -84,11 +84,10 @@ public class MailEntry extends WindowEntry {
 			model.msg("eMail sent!");
 		} else
 			model.msgW("Failed to send email!");
-
 	}
 
 	@Override
-	void Save() {
+	void save() {
 		mail.setDate(date.getValue());
 		mail.setTo(to.getText());
 		mail.setCc(cc.getText());
@@ -103,8 +102,6 @@ public class MailEntry extends WindowEntry {
 			model.merge(mail);
 		model.refresh();
 		setMail(mail);
-		// stage.close();
-
 	}
 
 	public void setMail(Mail mail) {
@@ -118,8 +115,8 @@ public class MailEntry extends WindowEntry {
 		body.setText(mail.getBody());
 		sent.setSelected(mail.isSent());
 		attachment.setText(mail.getAttachment());
-		// if (mail.isSent())
-		// sendBtn.setDisable(true);
-
+		if (mail.isSent()) {
+			sendBtn.setDisable(true);
+		}
 	}
 }

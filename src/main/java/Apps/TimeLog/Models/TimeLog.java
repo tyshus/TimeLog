@@ -49,6 +49,9 @@ public class TimeLog {
 	public void setMins(int mins) {
 		this.mins = mins;
 	}
+	
+	public TimeLog() {
+	}
 
 	public TimeLog(String company, String contactName, LocalDate logdate, LocalDate taskDate, String taskType,
 			String taskName, String taskBody, String myComment, double time) {
@@ -142,10 +145,6 @@ public class TimeLog {
 
 	public void setTime(double time) {
 		this.time = time;
-	}
-
-	public TimeLog() {
-		// TODO Auto-generated constructor stub
 	}
 
 	@Override

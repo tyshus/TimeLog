@@ -33,7 +33,7 @@ public class ReportExcelExport {
 		tableView = report.getTableView();
 		pth = report.getCompany() + "/TimeReports";
 		xlsx_file = pth + "/" + report.getDateTo().format(DateTimeFormatter.ofPattern("yyyyMMdd")) + "_TimeReport.xlsx";
-		model.CreateDirectory(pth);
+		model.createDirectory(pth);
 		@SuppressWarnings("resource")
 		XSSFWorkbook workbook = new XSSFWorkbook();
 		XSSFSheet sheet = workbook.createSheet("Time log report");
@@ -124,15 +124,9 @@ public class ReportExcelExport {
 			i++;
 		}
 
-		sheet.autoSizeColumn(1);
-		sheet.autoSizeColumn(2);
-		sheet.autoSizeColumn(3);
-		sheet.autoSizeColumn(4);
-		sheet.autoSizeColumn(5);
-		sheet.autoSizeColumn(6);
-		sheet.autoSizeColumn(7);
-		sheet.autoSizeColumn(8);
-		sheet.autoSizeColumn(9);
+		for (int j = 1; j < 10; j++) {
+			sheet.autoSizeColumn(j);
+		}
 		try {
 			FileOutputStream fileOut;
 			fileOut = new FileOutputStream(xlsx_file);

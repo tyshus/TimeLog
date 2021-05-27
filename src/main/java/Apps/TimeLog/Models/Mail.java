@@ -30,7 +30,6 @@ public class Mail {
 	private boolean sent;
 
 	public Mail() {
-		// TODO Auto-generated constructor stub
 	}
 
 	public Mail(long id, LocalDate date, String too, String cc, String bcc, String subject, String body,

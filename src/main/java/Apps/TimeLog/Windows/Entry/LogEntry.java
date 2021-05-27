@@ -5,7 +5,7 @@ import java.time.LocalDate;
 
 import Apps.TimeLog.Models.Model;
 import Apps.TimeLog.Models.TimeLog;
-import Apps.TimeLog.Windows.NumberTextField;
+import Apps.TimeLog.Windows.Fields.NumberTextField;
 import Apps.TimeLog.Windows.List.CompanyList;
 import Apps.TimeLog.Windows.List.ContactList;
 import Apps.TimeLog.Windows.List.InvoiceList;
@@ -90,13 +90,13 @@ public class LogEntry {
 		}
 
 		taskTypeCBox.getItems().addAll("Email", "Jira", "Skype", "Phone");
-		SetDefaults();
-		SetGrid();
+		setDefaults();
+		setGrid();
 		button.setOnAction(value -> {
-			Save();
+			save();
 		});
 		companyCBox.setOnAction(value -> {
-			LoadContacts();
+			loadContacts();
 		});
 
 		stage.setTitle("Time entry app");
@@ -105,7 +105,7 @@ public class LogEntry {
 		stage.show();
 	}
 
-	private void Save() {
+	private void save() {
 		if (timeLog.getId() <= 0) {
 			timeLog = new TimeLog();
 		}
@@ -129,12 +129,12 @@ public class LogEntry {
 			stage.close();
 		} else {
 			model.persist(timeLog);
-			SetDefaults();
+			setDefaults();
 			model.msg("Time: " + String.valueOf(time));
 		}
 	}
 
-	private void SetGrid() {
+	private void setGrid() {
 		grid.setVgap(4);
 		grid.setHgap(10);
 		grid.setPadding(new Insets(10, 10, 10, 10));
@@ -161,7 +161,7 @@ public class LogEntry {
 		grid.add(button, 5, 14);
 	}
 
-	private void SetDefaults() {
+	private void setDefaults() {
 		logDate.setValue(LocalDate.now());
 		taskDate.setValue(LocalDate.now());
 		taskName.setText(null);
@@ -171,18 +171,18 @@ public class LogEntry {
 		mins.setText(null);
 		taskTypeCBox.getSelectionModel().selectFirst();
 		companyCBox.getItems().clear();
-		companyCBox.getItems().addAll(model.CompanyList());
+		companyCBox.getItems().addAll(model.loadCompanies());
 		companyCBox.getSelectionModel().selectFirst();
-		LoadContacts();
+		loadContacts();
 	}
 
-	public void LoadContacts() {
+	public void loadContacts() {
 		contactCBox.getItems().clear();
-		contactCBox.getItems().addAll(model.ContacNametList(companyCBox.getValue()));
+		contactCBox.getItems().addAll(model.loadContacNametList(companyCBox.getValue()));
 		contactCBox.getSelectionModel().selectFirst();
 	}
 
-	public void SetTimeLog(TimeLog timeLog) {
+	public void setTimeLog(TimeLog timeLog) {
 		this.timeLog = timeLog;
 		companyCBox.getSelectionModel().select(timeLog.getCompany());
 		contactCBox.getSelectionModel().select(timeLog.getContactName());

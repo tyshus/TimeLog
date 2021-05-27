@@ -11,7 +11,7 @@ import javax.persistence.Table;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Parameter;
 
-//import org.hibernate.id.enhanced.SequenceStyleGenerator;
+
 
 @Entity(name = "invoices")
 @Table(name = "invoices")
@@ -33,7 +33,6 @@ public class Invoice {
 	private boolean sent;
 
 	public Invoice() {
-		// TODO Auto-generated constructor stub
 	}
 
 	public Invoice(String serno, LocalDate date, String company, String operation, String period, Double amount,

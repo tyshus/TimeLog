@@ -21,8 +21,8 @@ public class MailList extends WindowList {
 	public MailList() {
 		stage.setTitle("Mail List");
 		tableView = new TableView<Mail>();
-		AddColumns();
-		LoadData();
+		addColumns();
+		loadData();
 		root.getChildren().add(tableView);
 		tableView.setId("table-view");
 	}
@@ -45,7 +45,7 @@ public class MailList extends WindowList {
 
 	@SuppressWarnings("unchecked")
 	@Override
-	void AddColumns() {
+	void addColumns() {
 		id = new TableColumn<>("ID");
 		id.setCellValueFactory(new PropertyValueFactory<>("id"));
 		date = new TableColumn<>("Date");
@@ -69,12 +69,10 @@ public class MailList extends WindowList {
 	}
 
 	@Override
-	void LoadData() {
+	void loadData() {
 		tableView.getItems().clear();
-		for (Mail temp : model.MailList()) {
+		for (Mail temp : model.loadMailList()) {
 			tableView.getItems().add(temp);
 		}
-
 	}
-
 }

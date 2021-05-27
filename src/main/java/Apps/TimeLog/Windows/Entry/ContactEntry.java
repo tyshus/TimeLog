@@ -1,7 +1,7 @@
 package Apps.TimeLog.Windows.Entry;
 
 import Apps.TimeLog.Models.Contact;
-import Apps.TimeLog.Windows.NumberTextField;
+import Apps.TimeLog.Windows.Fields.NumberTextField;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
@@ -21,7 +21,7 @@ public class ContactEntry extends WindowEntry {
 		stage.setTitle("Contact");
 		emailtype.getItems().addAll("not sent", "To", "Cc", "Bcc");
 		emailtype.getSelectionModel().selectFirst();
-		company.getItems().addAll(model.CompanyList());
+		company.getItems().addAll(model.loadCompanies());
 		company.getSelectionModel().selectFirst();
 		grid.add(new Label("Company: "), 0, 0);
 		grid.add(company, 1, 0);
@@ -40,7 +40,7 @@ public class ContactEntry extends WindowEntry {
 		id.setEditable(false);
 	}
 
-	void Save() {
+	void save() {
 		contact.setName(name.getText());
 		contact.setEmail(email.getText());
 		contact.setActive(active.isSelected());

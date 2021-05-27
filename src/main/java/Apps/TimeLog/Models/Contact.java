@@ -22,7 +22,6 @@ public class Contact {
 	private boolean manager;
 
 	public Contact() {
-
 	}
 
 	public Contact(long id, String company, String name, String email, String emailtype, boolean active,
@@ -110,5 +109,4 @@ public class Contact {
 		return "Contact [id=" + id + ", company=" + company + ", name=" + name + ", email=" + email + ", emailtype="
 				+ emailtype + ", active=" + active + ", manager=" + manager + "]";
 	}
-
 }

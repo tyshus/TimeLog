@@ -9,17 +9,20 @@ import com.cloudmersive.client.invoker.ApiClient;
 import com.cloudmersive.client.invoker.ApiException;
 import com.cloudmersive.client.invoker.Configuration;
 import com.cloudmersive.client.invoker.auth.*;
+
+import Apps.TimeLog.Models.Model;
+
 import com.cloudmersive.client.ConvertDocumentApi;
 
 public class PrintPDF {
 
 	public PrintPDF(String docFile, String filename) throws IOException {
-
+		Model model = Model.getModel();
 		ApiClient defaultClient = Configuration.getDefaultApiClient();
 
 		// Configure API key authorization: Apikey
 		ApiKeyAuth Apikey = (ApiKeyAuth) defaultClient.getAuthentication("Apikey");
-		Apikey.setApiKey("5f628dfe-177a-4181-a6ab-2f4bc7fc61bb");
+		Apikey.setApiKey(model.prop.getProperty("ptd_apikey"));
 		// Uncomment the following line to set a prefix for the API key, e.g. "Token"
 		// (defaults to null)
 		// Apikey.setApiKeyPrefix("Token");

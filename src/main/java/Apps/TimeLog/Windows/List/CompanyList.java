@@ -18,8 +18,8 @@ public class CompanyList extends WindowList {
 	public CompanyList() {
 		stage.setTitle("Company List");
 		tableView = new TableView<Company>();
-		AddColumns();
-		LoadData();
+		addColumns();
+		loadData();
 		root.getChildren().add(tableView);
 		tableView.setId("table-view");
 	}
@@ -42,7 +42,7 @@ public class CompanyList extends WindowList {
 
 	@SuppressWarnings("unchecked")
 	@Override
-	void AddColumns() {
+	void addColumns() {
 		id = new TableColumn<>("Code");
 		id.setCellValueFactory(new PropertyValueFactory<>("id"));
 		name = new TableColumn<>("Name");
@@ -58,9 +58,9 @@ public class CompanyList extends WindowList {
 	}
 
 	@Override
-	void LoadData() {
+	void loadData() {
 		tableView.getItems().clear();
-		for (Company temp : model.CompanyObjectList()) {
+		for (Company temp : model.loadCompanyList()) {
 			tableView.getItems().add(temp);
 		}
 	}

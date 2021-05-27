@@ -1,4 +1,4 @@
-package Apps.TimeLog.Windows;
+package Apps.TimeLog.Windows.Fields;
 
 import javafx.scene.control.TextField;
 

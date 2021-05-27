@@ -24,17 +24,17 @@ public class InvoiceList extends WindowList {
 	public InvoiceList() {
 		stage.setTitle("Invoice List");
 		printBtn.setOnAction(value -> {
-			PrintInvoice();
+			printInvoice();
 		});
 		grid.add(printBtn, 2, 0);
 		tableView = new TableView<Invoice>();
-		AddColumns();
-		LoadData();
+		addColumns();
+		loadData();
 		root.getChildren().add(tableView);
 		tableView.setId("table-view");
 	}
 
-	void PrintInvoice() {
+	void printInvoice() {
 		Invoice invoice = (Invoice) tableView.getSelectionModel().getSelectedItem();
 		if (invoice != null) {
 			try {
@@ -58,7 +58,7 @@ public class InvoiceList extends WindowList {
 		Invoice invoice = (Invoice) tableView.getSelectionModel().getSelectedItem();
 		if (invoice != null) {
 			InvoiceEntry companyEntry = new InvoiceEntry();
-			companyEntry.SetInvoice(invoice);
+			companyEntry.setInvoice(invoice);
 		} else {
 			model.msgW("No invoice selected!");
 		}
@@ -66,7 +66,7 @@ public class InvoiceList extends WindowList {
 
 	@SuppressWarnings("unchecked")
 	@Override
-	void AddColumns() {
+	void addColumns() {
 		serNo = new TableColumn<>("Ser. no.");
 		serNo.setCellValueFactory(new PropertyValueFactory<>("serno"));
 		date = new TableColumn<>("Invoice date");
@@ -81,15 +81,13 @@ public class InvoiceList extends WindowList {
 		amount.setCellValueFactory(new PropertyValueFactory<>("amount"));
 		tableView.getColumns().addAll(serNo, date, company, operation, period, amount);
 		tableView.setPadding(new Insets(5, 5, 5, 5));
-
 	}
 
 	@Override
-	void LoadData() {
+	void loadData() {
 		tableView.getItems().clear();
-		for (Invoice temp : model.InvoiceList()) {
+		for (Invoice temp : model.loadInvoiceList()) {
 			tableView.getItems().add(temp);
 		}
 	}
-
 }

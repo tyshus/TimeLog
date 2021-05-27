@@ -18,7 +18,7 @@ public abstract class WindowEntry {
 
 	public WindowEntry() {
 		saveBtn.setOnAction(value -> {
-			Save();
+			save();
 		});
 		grid.setVgap(4);
 		grid.setHgap(10);
@@ -28,5 +28,5 @@ public abstract class WindowEntry {
 		stage.show();
 	}
 
-	abstract void Save();
+	abstract void save();
 }

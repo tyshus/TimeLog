@@ -1,7 +1,7 @@
 package Apps.TimeLog.Windows.Entry;
 
 import Apps.TimeLog.Models.Company;
-import Apps.TimeLog.Windows.DoubleTextField;
+import Apps.TimeLog.Windows.Fields.DoubleTextField;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 
@@ -45,7 +45,7 @@ public class CompanyEntry extends WindowEntry {
 	}
 
 	@Override
-	void Save() {
+	void save() {
 		company.setId(id.getText());
 		company.setName(name.getText());
 		company.setAddress(address.getText());

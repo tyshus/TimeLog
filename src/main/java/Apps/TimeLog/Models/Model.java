@@ -17,11 +17,13 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 
 public class Model {
+	private static Model model = null;
+	public PropertyLoader prop = PropertyLoader.getInstance();
+	private static EntityManager em;
+	private List<Runnable> listRefreshCallbacks = new ArrayList<>();
 
 	private Model() {
 	}
-
-	private static Model model = null;
 
 	public static Model getModel() {
 		if (model == null) {
@@ -30,10 +32,6 @@ public class Model {
 		}
 		return model;
 	}
-
-	public PropertyLoader prop = PropertyLoader.getInstance();
-
-	private static EntityManager em;
 
 	private static void createEntityManager() {
 		try {
@@ -67,48 +65,71 @@ public class Model {
 		}
 	}
 
-	public Company GetCompany(String id) {
+	public Company getCompany(String id) {
+		if (em != null) {
+			return null;
+		}
 		return em.find(Company.class, id);
 	}
 
-	public Invoice GetInvoice(String serno) {
+	public Invoice getInvoice(String serno) {
+		if (em != null) {
+			return null;
+		}
 		return em.find(Invoice.class, serno);
 	}
 
 	@SuppressWarnings("unchecked")
-	public List<Contact> ContactList() {
+	public List<Contact> loadContactList() {
+		if (em != null) {
+			return null;
+		}
 		return (List<Contact>) em.createQuery("FROM contacts").getResultList();
 	}
 
 	@SuppressWarnings("unchecked")
-	public List<Company> CompanyObjectList() {
+	public List<Company> loadCompanyList() {
+		if (em != null) {
+			return null;
+		}
 		return (List<Company>) em.createQuery("FROM companies").getResultList();
 	}
 
 	@SuppressWarnings("unchecked")
-	public List<Invoice> InvoiceList() {
+	public List<Invoice> loadInvoiceList() {
+		if (em != null) {
+			return null;
+		}
 		return (List<Invoice>) em.createQuery("FROM invoices").getResultList();
 	}
 
 	@SuppressWarnings("unchecked")
-	public List<Mail> MailList() {
+	public List<Mail> loadMailList() {
+		if (em != null) {
+			return null;
+		}
 		return (List<Mail>) em.createQuery("FROM mails").getResultList();
 	}
 
-	public ObservableList<String> ContacNametList(String company) {
-		ObservableList<String> result = FXCollections.observableArrayList();
+	public ObservableList<String> loadContacNametList(String company) {
 		if (em != null) {
-			@SuppressWarnings("unchecked")
-			List<Contact> list = (List<Contact>) em.createQuery("FROM contacts WHERE company = :cpy")
-					.setParameter("cpy", company).getResultList();
-			for (Contact temp : list) {
-				result.add(temp.getName());
-			}
+			return null;
 		}
+		ObservableList<String> result = FXCollections.observableArrayList();
+		@SuppressWarnings("unchecked")
+		List<Contact> list = (List<Contact>) em.createQuery("FROM contacts WHERE company = :cpy")
+				.setParameter("cpy", company).getResultList();
+		for (Contact temp : list) {
+			result.add(temp.getName());
+		}
+
 		return result;
 	}
 
 	public String getEmails(String company, String type) {
+		if (em != null) {
+			return null;
+		}
 		String emails = "";
 		@SuppressWarnings("unchecked")
 		List<Contact> list = (List<Contact>) em.createQuery("from contacts WHERE company = :cpy and emailtype = :type")
@@ -122,26 +143,28 @@ public class Model {
 	}
 
 	@SuppressWarnings("unchecked")
-	public List<TimeLog> ReportData(String company, LocalDate sdat, LocalDate edat) {
+	public List<TimeLog> loadReportData(String company, LocalDate sdat, LocalDate edat) {
+		if (em != null) {
+			return null;
+		}
 		return (List<TimeLog>) em
 				.createQuery("FROM timelogs WHERE company = :cpy and logdate >= :sdat and logdate <= :edat")
 				.setParameter("cpy", company).setParameter("sdat", sdat).setParameter("edat", edat).getResultList();
 
 	}
 
-	public ObservableList<String> CompanyList() {
-		ObservableList<String> result = FXCollections.observableArrayList();
+	public ObservableList<String> loadCompanies() {
 		if (em != null) {
-			@SuppressWarnings("unchecked")
-			List<Company> list = (List<Company>) em.createQuery("from companies").getResultList();
-			for (Company temp : list) {
-				result.add(temp.getId());
-			}
+			return null;
+		}
+		ObservableList<String> result = FXCollections.observableArrayList();
+		@SuppressWarnings("unchecked")
+		List<Company> list = (List<Company>) em.createQuery("from companies").getResultList();
+		for (Company temp : list) {
+			result.add(temp.getId());
 		}
 		return result;
 	}
-
-	private List<Runnable> listRefreshCallbacks = new ArrayList<>();
 
 	public Runnable addRefreshCallback(Runnable callback) {
 		listRefreshCallbacks.add(callback);
@@ -156,7 +179,7 @@ public class Model {
 		listRefreshCallbacks.forEach(c -> c.run());
 	}
 
-	public void CreateDirectory(String directoryName) {
+	public void createDirectory(String directoryName) {
 		File directory = new File(directoryName);
 		if (!directory.exists()) {
 			directory.mkdirs();

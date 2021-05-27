@@ -27,12 +27,12 @@ public class PrintInvoice {
 		pth = invoice.getCompany() + "/Invoices";
 		tmp_doc = pth + "/" + invoice.getSerno() + ".doc";
 		pdf = pth + "/" + invoice.getSerno() + ".pdf";
-		model.CreateDirectory(pth);
+		model.createDirectory(pth);
 
 		if (doc != null) {
 			DecimalFormat df = new DecimalFormat("0.00");
 			df.setRoundingMode(RoundingMode.UP);
-			Company company = model.GetCompany(invoice.getCompany());
+			Company company = model.getCompany(invoice.getCompany());
 			doc = replaceText(doc, "var_invno", invoice.getSerno());
 			doc = replaceText(doc, "var_invdate", invoice.getDate().format(DateTimeFormatter.ofPattern("yyyy/MM/dd")));
 			doc = replaceText(doc, "var_company", company.getName());
@@ -54,7 +54,6 @@ public class PrintInvoice {
 				model.msg("Invoice printed!");
 			} else
 				model.msgW("Failed to print invoice!");
-
 		}
 	}
 
@@ -90,7 +89,6 @@ public class PrintInvoice {
 			doc.write(out);
 		} catch (IOException e) {
 			e.printStackTrace();
-
 		}
 	}
 }

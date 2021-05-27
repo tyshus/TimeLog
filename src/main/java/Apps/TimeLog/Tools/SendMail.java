@@ -34,8 +34,6 @@ public class SendMail {
 	}
 
 	public boolean send(Mail mail) {
-		// get Session
-		boolean res = false;
 		Session session = Session.getDefaultInstance(props, new javax.mail.Authenticator() {
 			protected PasswordAuthentication getPasswordAuthentication() {
 				return new PasswordAuthentication(prop.getProperty("gmail_acc"), prop.getProperty("gmail_psw"));

@@ -47,23 +47,22 @@ public class Report extends WindowList {
 	public Report() {
 		stage.setTitle("Report");
 		tableView = new TableView<TimeLog>();
-
-		companyCBox.getItems().addAll(model.CompanyList());
+		companyCBox.getItems().addAll(model.loadCompanies());
 		companyCBox.getSelectionModel().selectFirst();
 		dateFrom.setValue(LocalDate.now());
 		dateTo.setValue(LocalDate.now());
 
 		filterBtn.setOnAction(value -> {
-			LoadData();
+			loadData();
 		});
 		mailBtn.setOnAction(value -> {
-			SendeMail();
+			sendEmail();
 		});
 		invoiceBtn.setOnAction(vaue -> {
-			CreatInvoice();
+			creatInvoice();
 		});
-		AddColumns();
-		LoadData();
+		addColumns();
+		loadData();
 		newBtn.setVisible(false);
 		grid.add(companyCBox, 2, 0);
 		grid.add(dateFrom, 3, 0);
@@ -85,7 +84,7 @@ public class Report extends WindowList {
 
 	}
 
-	void SendeMail() {
+	void sendEmail() {
 		new ReportExcelExport(this);
 		if (new File(this.getPrintout()).exists()) {
 			String period = this.dateFrom.getValue().format(DateTimeFormatter.ofPattern("yyyy.MM.dd")) + "-"
@@ -120,17 +119,17 @@ public class Report extends WindowList {
 		}
 	}
 
-	void CreatInvoice() {
+	void creatInvoice() {
 		InvoiceEntry companyEntry = new InvoiceEntry();
 		Invoice invoice = new Invoice();
-		Company company = model.GetCompany(companyCBox.getValue());
+		Company company = model.getCompany(companyCBox.getValue());
 		invoice.setDate(LocalDate.now());
 		invoice.setCompany(companyCBox.getValue());
 		invoice.setAmount(totalHours * company.getRate());
 		invoice.setOperation(model.prop.getProperty("invoice_operation"));
 		invoice.setPeriod(dateFrom.getValue().format(DateTimeFormatter.ofPattern("yyyy.MM.dd")) + "-"
 				+ dateTo.getValue().format(DateTimeFormatter.ofPattern("yyyy.MM.dd")));
-		companyEntry.SetInvoice(invoice);
+		companyEntry.setInvoice(invoice);
 	}
 
 	@Override
@@ -140,16 +139,15 @@ public class Report extends WindowList {
 			Stage tmp = new Stage();
 			tmp.initOwner(stage);
 			LogEntry logEntry = new LogEntry(tmp);
-			logEntry.SetTimeLog(timeLog);
+			logEntry.setTimeLog(timeLog);
 		} else {
 			model.msgW("No log selected!");
 		}
-
 	}
 
 	@SuppressWarnings("unchecked")
 	@Override
-	void AddColumns() {
+	void addColumns() {
 		id = new TableColumn<>("Id");
 		id.setCellValueFactory(new PropertyValueFactory<>("id"));
 		contactName = new TableColumn<>("Contact Name");
@@ -178,10 +176,10 @@ public class Report extends WindowList {
 	}
 
 	@Override
-	void LoadData() {
+	void loadData() {
 		tableView.getItems().clear();
 		totalHours = 0;
-		for (TimeLog temp : model.ReportData(companyCBox.getValue(), dateFrom.getValue(), dateTo.getValue())) {
+		for (TimeLog temp : model.loadReportData(companyCBox.getValue(), dateFrom.getValue(), dateTo.getValue())) {
 			tableView.getItems().add(temp);
 			totalHours += temp.getTime();
 		}
@@ -215,5 +213,4 @@ public class Report extends WindowList {
 	public String getPrintout() {
 		return this.printout;
 	}
-
 }

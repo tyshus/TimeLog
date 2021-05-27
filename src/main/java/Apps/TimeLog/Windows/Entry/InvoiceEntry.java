@@ -5,7 +5,7 @@ import java.time.LocalDate;
 import Apps.TimeLog.Models.Invoice;
 import Apps.TimeLog.Models.Mail;
 import Apps.TimeLog.Tools.PrintInvoice;
-import Apps.TimeLog.Windows.DoubleTextField;
+import Apps.TimeLog.Windows.Fields.DoubleTextField;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ComboBox;
@@ -33,13 +33,13 @@ public class InvoiceEntry extends WindowEntry {
 		printBtn.setOnAction(value -> {
 			try {
 				new PrintInvoice(invoice);
-				SetInvoice(invoice);
+				setInvoice(invoice);
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
 		});
 		mailBtn.setOnAction(value -> {
-			CreateMail();
+			createMail();
 		});
 
 		serNo.setPrefWidth(100);
@@ -51,7 +51,7 @@ public class InvoiceEntry extends WindowEntry {
 		bline.setSpacing(20.0);
 		bline.getChildren().addAll(saveBtn, printBtn, mailBtn);
 
-		company.getItems().addAll(model.CompanyList());
+		company.getItems().addAll(model.loadCompanies());
 		company.getSelectionModel().selectFirst();
 
 		grid.add(hline, 1, 0, 1, 1);
@@ -73,7 +73,7 @@ public class InvoiceEntry extends WindowEntry {
 		mailBtn.setDisable(true);
 	}
 
-	void CreateMail() {
+	void createMail() {
 		StringBuilder mailbody = new StringBuilder();
 		mailbody.append(model.prop.getProperty("mail_greatings0"));
 		mailbody.append(System.getProperty("line.separator"));
@@ -104,22 +104,23 @@ public class InvoiceEntry extends WindowEntry {
 	}
 
 	@Override
-	void Save() {
+	void save() {
 		invoice.setCompany(company.getValue());
 		invoice.setDate(date.getValue());
 		invoice.setOperation(operation.getText());
 		invoice.setPeriod(period.getText());
 		invoice.setAmount(amount.getDouble());
-		if (serNo.getText() == null)
+		if (serNo.getText() == null) {
 			model.persist(invoice);
-		else
+		}
+		else {
 			model.merge(invoice);
+		}
 		model.refresh();
-		SetInvoice(invoice);
-		// stage.close();
+		setInvoice(invoice);
 	}
 
-	public void SetInvoice(Invoice invoice) {
+	public void setInvoice(Invoice invoice) {
 		this.invoice = invoice;
 		serNo.setText(invoice.getSerno());
 		company.setValue(invoice.getCompany());
@@ -130,11 +131,13 @@ public class InvoiceEntry extends WindowEntry {
 		printed.setSelected(invoice.isPrinted());
 		sent.setSelected(invoice.isSent());
 		if (invoice.isPrinted()) {
-			if (!invoice.isSent())
+			if (!invoice.isSent()) {
 				mailBtn.setDisable(false);
+			}
 		} else {
-			if (!invoice.getSerno().isEmpty())
+			if (!invoice.getSerno().isEmpty()) {
 				printBtn.setDisable(false);
+			}
 		}
 
 	}

@@ -36,7 +36,7 @@ public abstract class WindowList {
 		root.getChildren().add(grid);
 		stage.setScene(scene);
 		stage.show();
-		callback = model.addRefreshCallback(() -> LoadData());
+		callback = model.addRefreshCallback(() -> loadData());
 		stage.setOnCloseRequest(new EventHandler<WindowEvent>() {
 			public void handle(WindowEvent we) {
 				model.removeRefreshCallback(callback);
@@ -48,7 +48,7 @@ public abstract class WindowList {
 
 	abstract void editEntry();
 
-	abstract void AddColumns();
+	abstract void addColumns();
 
-	abstract void LoadData();
+	abstract void loadData();
 }

@@ -17,21 +17,21 @@ public class ContactList extends WindowList {
 	public ContactList() {
 		stage.setTitle("Contact List");
 		tableView = new TableView<Contact>();
-		AddColumns();
-		LoadData();
+		addColumns();
+		loadData();
 		root.getChildren().add(tableView);
 		tableView.setId("table-view");
 	}
 
-	public void LoadData() {
+	public void loadData() {
 		tableView.getItems().clear();
-		for (Contact temp : model.ContactList()) {
+		for (Contact temp : model.loadContactList()) {
 			tableView.getItems().add(temp);
 		}
 	}
 
 	@SuppressWarnings("unchecked")
-	void AddColumns() {
+	void addColumns() {
 		id = new TableColumn<>("ID");
 		id.setCellValueFactory(new PropertyValueFactory<>("id"));
 		name = new TableColumn<>("Name");
