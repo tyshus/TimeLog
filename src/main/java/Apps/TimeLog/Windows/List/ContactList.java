@@ -13,22 +13,23 @@ public class ContactList extends WindowList {
 	private TableColumn<Contact, String> name;
 	private TableColumn<Contact, String> company;
 	private TableView<Contact> tableView;
+
 	public ContactList() {
-		stage.setTitle("Contact List"); 
+		stage.setTitle("Contact List");
 		tableView = new TableView<Contact>();
 		AddColumns();
 		LoadData();
-        root.getChildren().add(tableView);
-		tableView.setId("table-view"); 
+		root.getChildren().add(tableView);
+		tableView.setId("table-view");
 	}
-	
+
 	public void LoadData() {
 		tableView.getItems().clear();
 		for (Contact temp : model.ContactList()) {
 			tableView.getItems().add(temp);
 		}
 	}
-	
+
 	@SuppressWarnings("unchecked")
 	void AddColumns() {
 		id = new TableColumn<>("ID");
@@ -37,21 +38,22 @@ public class ContactList extends WindowList {
 		name.setCellValueFactory(new PropertyValueFactory<>("name"));
 		company = new TableColumn<>("Company");
 		company.setCellValueFactory(new PropertyValueFactory<>("company"));
-		tableView.getColumns().addAll(id,name,company);
+		tableView.getColumns().addAll(id, name, company);
 		tableView.setPadding(new Insets(5, 5, 5, 5));
 	}
+
 	@Override
 	void newEntry() {
 		new ContactEntry();
 	}
+
 	@Override
 	void editEntry() {
-		Contact contact = (Contact)tableView.getSelectionModel().getSelectedItem();
+		Contact contact = (Contact) tableView.getSelectionModel().getSelectedItem();
 		if (contact != null) {
 			ContactEntry contactEntry = new ContactEntry();
 			contactEntry.setCustomer(contact);
-		}
-		else {
+		} else {
 			model.msgW("No contact selected!");
 		}
 	}

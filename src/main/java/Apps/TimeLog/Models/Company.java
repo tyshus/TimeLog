@@ -14,7 +14,6 @@ public class Company {
 	private String code;
 	private String vatRegNo;
 	private Double rate;
-	
 
 	public Company(String id, String name, String address, String code, String vatRegNo, double rate) {
 		super();
@@ -26,16 +25,13 @@ public class Company {
 		this.rate = rate;
 	}
 
-
 	public double getRate() {
 		return rate;
 	}
 
-
 	public void setRate(Double rate) {
 		this.rate = rate;
 	}
-
 
 	public Company() {
 		// TODO Auto-generated constructor stub
@@ -45,51 +41,42 @@ public class Company {
 		return id;
 	}
 
-
 	public void setId(String id) {
 		this.id = id;
 	}
-
 
 	public String getName() {
 		return name;
 	}
 
-
 	public void setName(String name) {
 		this.name = name;
 	}
-
 
 	public String getAddress() {
 		return address;
 	}
 
-
 	public void setAddress(String address) {
 		this.address = address;
 	}
-
 
 	public String getCode() {
 		return code;
 	}
 
-
 	public void setCode(String code) {
 		this.code = code;
 	}
-
 
 	public String getVatRegNo() {
 		return vatRegNo;
 	}
 
-
 	public void setVatRegNo(String vatRegNo) {
 		this.vatRegNo = vatRegNo;
 	}
-	
+
 	@Override
 	public String toString() {
 		return "Company [id=" + id + ", name=" + name + ", address=" + address + ", code=" + code + ", vatRegNo="

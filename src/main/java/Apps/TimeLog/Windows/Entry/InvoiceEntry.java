@@ -21,56 +21,58 @@ public class InvoiceEntry extends WindowEntry {
 	private TextField operation = new TextField("");
 	private TextField period = new TextField("");
 	private DoubleTextField amount = new DoubleTextField();
-	private Button printBtn = new Button ("Print");
-	private Button mailBtn = new Button ("Email");
-	private CheckBox sent = new CheckBox("Sent"); 
-	private CheckBox printed = new CheckBox("Printed"); 
+	private Button printBtn = new Button("Print");
+	private Button mailBtn = new Button("Email");
+	private CheckBox sent = new CheckBox("Sent");
+	private CheckBox printed = new CheckBox("Printed");
 	private Invoice invoice = new Invoice();
+
 	public InvoiceEntry() {
-		stage.setTitle("Invoice"); 
-		
-		printBtn.setOnAction(value ->  {try {
-			new PrintInvoice(invoice);
-			SetInvoice(invoice);
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}});
-		mailBtn.setOnAction(value -> {CreateMail();});
-		
+		stage.setTitle("Invoice");
+
+		printBtn.setOnAction(value -> {
+			try {
+				new PrintInvoice(invoice);
+				SetInvoice(invoice);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		});
+		mailBtn.setOnAction(value -> {
+			CreateMail();
+		});
 
 		serNo.setPrefWidth(100);
-		serNo.setMaxWidth(100);		
+		serNo.setMaxWidth(100);
 		HBox hline = new HBox();
 		hline.setSpacing(15.0);
-		hline.getChildren().addAll(new Label("Ser. no.:"), serNo,printed,sent);
+		hline.getChildren().addAll(new Label("Ser. no.:"), serNo, printed, sent);
 		HBox bline = new HBox();
 		bline.setSpacing(20.0);
-		bline.getChildren().addAll(saveBtn,printBtn,mailBtn);
-		
-		
-        company.getItems().addAll(model.CompanyList());
-        company.getSelectionModel().selectFirst();
-        
-        grid.add(hline,1,0,1,1);
-        grid.add(new Label("Date: "), 0, 1);
-        grid.add(date, 1,1); 
-        grid.add(new Label("Company: "), 0, 2);
-        grid.add(company, 1,2); 
-        grid.add(new Label("Operation: "), 0, 3);
-        grid.add(operation, 1,3); 
-        grid.add(new Label("Period: "), 0, 4);
-        grid.add(period, 1,4); 
-        grid.add(new Label("Amount: "), 0, 5);
-        grid.add(amount, 1,5); 
-        grid.add(bline,1,6);
-        serNo.setEditable(false);
-        printed.setDisable(true);
-        sent.setDisable(true);
-        printBtn.setDisable(true);
-        mailBtn.setDisable(true);
+		bline.getChildren().addAll(saveBtn, printBtn, mailBtn);
+
+		company.getItems().addAll(model.CompanyList());
+		company.getSelectionModel().selectFirst();
+
+		grid.add(hline, 1, 0, 1, 1);
+		grid.add(new Label("Date: "), 0, 1);
+		grid.add(date, 1, 1);
+		grid.add(new Label("Company: "), 0, 2);
+		grid.add(company, 1, 2);
+		grid.add(new Label("Operation: "), 0, 3);
+		grid.add(operation, 1, 3);
+		grid.add(new Label("Period: "), 0, 4);
+		grid.add(period, 1, 4);
+		grid.add(new Label("Amount: "), 0, 5);
+		grid.add(amount, 1, 5);
+		grid.add(bline, 1, 6);
+		serNo.setEditable(false);
+		printed.setDisable(true);
+		sent.setDisable(true);
+		printBtn.setDisable(true);
+		mailBtn.setDisable(true);
 	}
-	
+
 	void CreateMail() {
 		StringBuilder mailbody = new StringBuilder();
 		mailbody.append(model.prop.getProperty("mail_greatings0"));
@@ -83,19 +85,19 @@ public class InvoiceEntry extends WindowEntry {
 		mailbody.append(model.prop.getProperty("mail_greatings1"));
 		mailbody.append(System.getProperty("line.separator"));
 		mailbody.append(model.prop.getProperty("mail_greatings2"));
-		
+
 		Mail mail = new Mail();
 		mail.setTo(model.getEmails(invoice.getCompany(), "To"));
 		mail.setCc(model.getEmails(invoice.getCompany(), "Cc"));
 		mail.setBcc(model.getEmails(invoice.getCompany(), "Bcc"));
 		mail.setSourceid(invoice.getSerno());
 		mail.setSourcetype("inv");
-		mail.setSubject("Invoice for period: "+invoice.getPeriod());
+		mail.setSubject("Invoice for period: " + invoice.getPeriod());
 		mail.setBody(mailbody.toString());
 		mail.setAttachment(invoice.getPrintout());
 		mail.setDate(LocalDate.now());
 		model.persist(mail);
-		
+
 		MailEntry mailEntry = new MailEntry();
 		mailEntry.setMail(mail);
 		stage.close();
@@ -114,9 +116,9 @@ public class InvoiceEntry extends WindowEntry {
 			model.merge(invoice);
 		model.refresh();
 		SetInvoice(invoice);
-		//stage.close();
+		// stage.close();
 	}
-	
+
 	public void SetInvoice(Invoice invoice) {
 		this.invoice = invoice;
 		serNo.setText(invoice.getSerno());
@@ -130,12 +132,11 @@ public class InvoiceEntry extends WindowEntry {
 		if (invoice.isPrinted()) {
 			if (!invoice.isSent())
 				mailBtn.setDisable(false);
-		}
-		else {
+		} else {
 			if (!invoice.getSerno().isEmpty())
 				printBtn.setDisable(false);
 		}
-			
+
 	}
 
 }

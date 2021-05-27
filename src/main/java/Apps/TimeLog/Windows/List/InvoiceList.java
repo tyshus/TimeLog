@@ -11,7 +11,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 
-public class InvoiceList extends WindowList{
+public class InvoiceList extends WindowList {
 	private TableColumn<Invoice, String> serNo;
 	private TableColumn<Invoice, LocalDate> date;
 	private TableColumn<Invoice, String> company;
@@ -19,20 +19,23 @@ public class InvoiceList extends WindowList{
 	private TableColumn<Invoice, String> period;
 	private TableColumn<Invoice, Double> amount;
 	private TableView<Invoice> tableView;
-	private Button printBtn = new Button ("Print");
+	private Button printBtn = new Button("Print");
+
 	public InvoiceList() {
-		stage.setTitle("Invoice List"); 
-		printBtn.setOnAction(value ->  {PrintInvoice();});
+		stage.setTitle("Invoice List");
+		printBtn.setOnAction(value -> {
+			PrintInvoice();
+		});
 		grid.add(printBtn, 2, 0);
 		tableView = new TableView<Invoice>();
 		AddColumns();
 		LoadData();
-        root.getChildren().add(tableView);
+		root.getChildren().add(tableView);
 		tableView.setId("table-view");
 	}
 
 	void PrintInvoice() {
-		Invoice invoice = (Invoice)tableView.getSelectionModel().getSelectedItem();
+		Invoice invoice = (Invoice) tableView.getSelectionModel().getSelectedItem();
 		if (invoice != null) {
 			try {
 				new PrintInvoice(invoice);
@@ -40,11 +43,11 @@ public class InvoiceList extends WindowList{
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-		}
-		else {
+		} else {
 			model.msgW("No invoice selected!");
 		}
 	}
+
 	@Override
 	void newEntry() {
 		new InvoiceEntry();
@@ -52,12 +55,11 @@ public class InvoiceList extends WindowList{
 
 	@Override
 	void editEntry() {
-		Invoice invoice = (Invoice)tableView.getSelectionModel().getSelectedItem();
+		Invoice invoice = (Invoice) tableView.getSelectionModel().getSelectedItem();
 		if (invoice != null) {
 			InvoiceEntry companyEntry = new InvoiceEntry();
 			companyEntry.SetInvoice(invoice);
-		}
-		else {
+		} else {
 			model.msgW("No invoice selected!");
 		}
 	}
@@ -77,9 +79,9 @@ public class InvoiceList extends WindowList{
 		period.setCellValueFactory(new PropertyValueFactory<>("period"));
 		amount = new TableColumn<>("Amount");
 		amount.setCellValueFactory(new PropertyValueFactory<>("amount"));
-		tableView.getColumns().addAll(serNo,date,company,operation,period,amount);
+		tableView.getColumns().addAll(serNo, date, company, operation, period, amount);
 		tableView.setPadding(new Insets(5, 5, 5, 5));
-		
+
 	}
 
 	@Override

@@ -14,28 +14,21 @@ import javax.persistence.Table;
 @Table(name = "mails")
 public class Mail {
 	@Id
-	@SequenceGenerator(
-			name = "mails_sequence",
-			sequenceName = "mails_sequence",
-			allocationSize = 1
-	)
-	@GeneratedValue(
-			strategy = GenerationType.SEQUENCE,
-			generator = "mails_sequence"
-	)
+	@SequenceGenerator(name = "mails_sequence", sequenceName = "mails_sequence", allocationSize = 1)
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "mails_sequence")
 	private long id;
 	private LocalDate date;
 	private String too;
 	private String cc;
 	private String bcc;
 	private String subject;
-	@Column(length=10485760)
+	@Column(length = 10485760)
 	private String body;
 	private String attachment;
 	private String sourcetype;
 	private String sourceid;
 	private boolean sent;
-	
+
 	public Mail() {
 		// TODO Auto-generated constructor stub
 	}
@@ -59,48 +52,63 @@ public class Mail {
 	public long getId() {
 		return id;
 	}
+
 	public void setId(long id) {
 		this.id = id;
 	}
+
 	public LocalDate getDate() {
 		return date;
 	}
+
 	public void setDate(LocalDate date) {
 		this.date = date;
 	}
+
 	public String getTo() {
 		return too;
 	}
+
 	public void setTo(String too) {
 		this.too = too;
 	}
+
 	public String getCc() {
 		return cc;
 	}
+
 	public void setCc(String cc) {
 		this.cc = cc;
 	}
+
 	public String getBcc() {
 		return bcc;
 	}
+
 	public void setBcc(String bcc) {
 		this.bcc = bcc;
 	}
+
 	public String getSubject() {
 		return subject;
 	}
+
 	public void setSubject(String subject) {
 		this.subject = subject;
 	}
+
 	public String getBody() {
 		return body;
 	}
+
 	public void setBody(String body) {
 		this.body = body;
 	}
+
 	public boolean isSent() {
 		return sent;
 	}
+
 	public void setSent(boolean sent) {
 		this.sent = sent;
 	}
@@ -135,7 +143,5 @@ public class Mail {
 				+ subject + ", body=" + body + ", attachment=" + attachment + ", sourcetype=" + sourcetype
 				+ ", sourceid=" + sourceid + ", sent=" + sent + "]";
 	}
-
-
 
 }

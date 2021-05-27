@@ -11,15 +11,8 @@ import javax.persistence.Table;
 @Table(name = "contacts")
 public class Contact {
 	@Id
-	@SequenceGenerator(
-			name = "contacts_sequence",
-			sequenceName = "contacts_sequence",
-			allocationSize = 1
-	)
-	@GeneratedValue(
-			strategy = GenerationType.SEQUENCE,
-			generator = "contacts_sequence"
-	)
+	@SequenceGenerator(name = "contacts_sequence", sequenceName = "contacts_sequence", allocationSize = 1)
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "contacts_sequence")
 	private long id;
 	private String company;
 	private String name;
@@ -27,7 +20,7 @@ public class Contact {
 	private String emailtype;
 	private boolean active;
 	private boolean manager;
-	
+
 	public Contact() {
 
 	}
@@ -50,7 +43,7 @@ public class Contact {
 
 	public Contact setActive(boolean active) {
 		this.active = active;
-		
+
 		return this;
 	}
 
@@ -60,7 +53,7 @@ public class Contact {
 
 	public Contact setManager(boolean manager) {
 		this.manager = manager;
-		
+
 		return this;
 	}
 
@@ -70,7 +63,7 @@ public class Contact {
 
 	public Contact setId(long id) {
 		this.id = id;
-		
+
 		return this;
 	}
 
@@ -80,7 +73,7 @@ public class Contact {
 
 	public Contact setCompany(String company) {
 		this.company = company;
-		
+
 		return this;
 	}
 
@@ -90,7 +83,7 @@ public class Contact {
 
 	public Contact setName(String name) {
 		this.name = name;
-		
+
 		return this;
 	}
 
@@ -100,7 +93,7 @@ public class Contact {
 
 	public Contact setEmail(String email) {
 		this.email = email;
-		
+
 		return this;
 	}
 
@@ -117,5 +110,5 @@ public class Contact {
 		return "Contact [id=" + id + ", company=" + company + ", name=" + name + ", email=" + email + ", emailtype="
 				+ emailtype + ", active=" + active + ", manager=" + manager + "]";
 	}
-	
+
 }

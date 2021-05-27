@@ -10,19 +10,23 @@ import javafx.stage.Stage;
 
 public abstract class WindowEntry {
 	Stage stage = new Stage();
-    GridPane grid = new GridPane();
-    Scene scene = new Scene(new VBox(), 450, 250);
-	Button saveBtn = new Button ("Save");
+	GridPane grid = new GridPane();
+	Scene scene = new Scene(new VBox(), 450, 250);
+	Button saveBtn = new Button("Save");
 	Model model = Model.getModel();
-    VBox root = (VBox)scene.getRoot();
+	VBox root = (VBox) scene.getRoot();
+
 	public WindowEntry() {
-        saveBtn.setOnAction(value ->  {Save();});
-        grid.setVgap(4);
-        grid.setHgap(10);
-        grid.setPadding(new Insets(10, 10, 10, 10));
-        root.getChildren().add(grid);
-        stage.setScene(scene);
-        stage.show();
+		saveBtn.setOnAction(value -> {
+			Save();
+		});
+		grid.setVgap(4);
+		grid.setHgap(10);
+		grid.setPadding(new Insets(10, 10, 10, 10));
+		root.getChildren().add(grid);
+		stage.setScene(scene);
+		stage.show();
 	}
+
 	abstract void Save();
 }

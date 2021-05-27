@@ -13,15 +13,16 @@ import com.cloudmersive.client.ConvertDocumentApi;
 
 public class PrintPDF {
 
-	public PrintPDF(String docFile,String filename) throws IOException {
+	public PrintPDF(String docFile, String filename) throws IOException {
 
 		ApiClient defaultClient = Configuration.getDefaultApiClient();
 
 		// Configure API key authorization: Apikey
 		ApiKeyAuth Apikey = (ApiKeyAuth) defaultClient.getAuthentication("Apikey");
 		Apikey.setApiKey("5f628dfe-177a-4181-a6ab-2f4bc7fc61bb");
-		// Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
-		//Apikey.setApiKeyPrefix("Token");
+		// Uncomment the following line to set a prefix for the API key, e.g. "Token"
+		// (defaults to null)
+		// Apikey.setApiKeyPrefix("Token");
 
 		ConvertDocumentApi apiInstance = new ConvertDocumentApi();
 		File inputFile = new File(docFile); // File | Input file to perform the operation on.

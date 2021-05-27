@@ -14,12 +14,13 @@ public class CompanyList extends WindowList {
 	private TableColumn<Company, String> code;
 	private TableColumn<Company, String> vatRegNo;
 	private TableView<Company> tableView;
+
 	public CompanyList() {
-		stage.setTitle("Company List"); 
+		stage.setTitle("Company List");
 		tableView = new TableView<Company>();
 		AddColumns();
 		LoadData();
-        root.getChildren().add(tableView);
+		root.getChildren().add(tableView);
 		tableView.setId("table-view");
 	}
 
@@ -30,12 +31,11 @@ public class CompanyList extends WindowList {
 
 	@Override
 	void editEntry() {
-		Company company = (Company)tableView.getSelectionModel().getSelectedItem();
+		Company company = (Company) tableView.getSelectionModel().getSelectedItem();
 		if (company != null) {
 			CompanyEntry companyEntry = new CompanyEntry();
 			companyEntry.setCompany(company);
-		}
-		else {
+		} else {
 			model.msgW("No company selected!");
 		}
 	}
@@ -53,7 +53,7 @@ public class CompanyList extends WindowList {
 		code.setCellValueFactory(new PropertyValueFactory<>("code"));
 		vatRegNo = new TableColumn<>("VAT reg. no.");
 		vatRegNo.setCellValueFactory(new PropertyValueFactory<>("vatRegNo"));
-		tableView.getColumns().addAll(id,name,address,code,vatRegNo);
+		tableView.getColumns().addAll(id, name, address, code, vatRegNo);
 		tableView.setPadding(new Insets(5, 5, 5, 5));
 	}
 

@@ -14,33 +14,26 @@ import javax.persistence.Table;
 @Table(name = "timelogs")
 public class TimeLog {
 	@Id
-	@SequenceGenerator(
-			name = "timeLogs_sequence",
-			sequenceName = "timeLogs_sequence",
-			allocationSize = 1
-	)
-	@GeneratedValue(
-			strategy = GenerationType.SEQUENCE,
-			generator = "timeLogs_sequence"
-	)
+	@SequenceGenerator(name = "timeLogs_sequence", sequenceName = "timeLogs_sequence", allocationSize = 1)
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "timeLogs_sequence")
 	private long id;
 	private String company;
 	private String contactName;
-	@Column(name="logdate")
+	@Column(name = "logdate")
 	private LocalDate logDate;
 	private LocalDate taskDate;
 	private String taskType;
 	private String taskName;
-	@Column(length=10485760)
+	@Column(length = 10485760)
 	private String taskBody;
-	@Column(length=10485760)
+	@Column(length = 10485760)
 	private String myComment;
 	private double time;
 	@Column(name = "hours", nullable = true)
 	private int hours;
 	@Column(name = "mins", nullable = true)
 	private int mins;
-	
+
 	public int getHours() {
 		return hours;
 	}
