@@ -13,13 +13,13 @@ import javafx.scene.layout.VBox;
 import lombok.Getter;
 
 public class ContactEntry extends VBox {
-	private  NumberTextField id = new NumberTextField();
-	private @Getter ComboBox<String> company = new ComboBox<String>();
-	private @Getter ComboBox<String> emailtype = new ComboBox<String>();
-	private @Getter TextField name = new TextField("");
-	private @Getter TextField email = new TextField("");
-	private @Getter CheckBox active = new CheckBox("Active");
-	private @Getter CheckBox manager = new CheckBox("Manager");
+	private NumberTextField id = new NumberTextField();
+	private ComboBox<String> company = new ComboBox<String>();
+	private ComboBox<String> emailtype = new ComboBox<String>();
+	private TextField name = new TextField("");
+	private TextField email = new TextField("");
+	private CheckBox active = new CheckBox("Active");
+	private CheckBox manager = new CheckBox("Manager");
 	private @Getter Button saveBtn = new Button("Save");
 	private GridPane grid = new GridPane();
 
@@ -58,7 +58,7 @@ public class ContactEntry extends VBox {
 	}
 
 	public void setContact(Contact contact) {
-		if (contact == null) {
+		if (contact.getId() <=0 ) {
 			this.setDefaults();
 		} else {
 			id.SetLong(contact.getId());
@@ -71,36 +71,16 @@ public class ContactEntry extends VBox {
 		}
 	}
 
-	public void setCompanies(ObservableList<String> list) {
+	public void getContact(Contact contact) {
+		contact.setName(name.getText());
+		contact.setEmail(email.getText());
+		contact.setActive(active.isSelected());
+		contact.setManager(manager.isSelected());
+		contact.setCompany(company.getValue());
+		contact.setEmailtype(emailtype.getValue());
+	}
+
+	public void fillCompanies(ObservableList<String> list) {
 		company.getItems().addAll(list);
 	}
-
-	public void setId(long id) {
-		this.id.setText(String.valueOf(id));
-	}
-
-	public void setCompany(String company) {
-		this.company.getSelectionModel().select(company);
-	}
-
-	public void setEmailtype(String emailtype) {
-		this.emailtype.getSelectionModel().select(emailtype);
-	}
-
-	public void setName(String name) {
-		this.name.setText(name);
-	}
-
-	public void setEmail(String email) {
-		this.email.setText(email);
-	}
-
-	public void setActive(boolean active) {
-		this.active.setSelected(active);
-	}
-
-	public void setManager(boolean manager) {
-		this.manager.setSelected(manager);
-	}
-
 }

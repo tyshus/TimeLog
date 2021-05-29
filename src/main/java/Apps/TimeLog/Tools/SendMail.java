@@ -18,7 +18,7 @@ import javax.mail.internet.MimeBodyPart;
 import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeMultipart;
 
-import Apps.TimeLog.Models.Mail;
+import Apps.TimeLog.Mail.Mail;
 
 public class SendMail {
 
@@ -42,7 +42,7 @@ public class SendMail {
 
 		try {
 			MimeMessage message = new MimeMessage(session);
-			for (String s : mail.getTo().split(";"))
+			for (String s : mail.getToo().split(";"))
 				message.addRecipient(Message.RecipientType.TO, new InternetAddress(s));
 
 			if (!mail.getCc().isEmpty()) {

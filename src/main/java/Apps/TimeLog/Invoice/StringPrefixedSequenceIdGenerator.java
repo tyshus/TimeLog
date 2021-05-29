@@ -1,4 +1,4 @@
-package Apps.TimeLog.Models;
+package Apps.TimeLog.Invoice;
 
 import java.io.Serializable;
 import java.util.Properties;

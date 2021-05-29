@@ -1,20 +1,24 @@
-package Apps.TimeLog.Windows.Entry;
+package Apps.TimeLog.Mail;
 
 import java.time.LocalDate;
 
-import Apps.TimeLog.Models.Invoice;
-import Apps.TimeLog.Models.Mail;
+import Apps.TimeLog.Invoice.Invoice;
 import Apps.TimeLog.Tools.SendMail;
+import Apps.TimeLog.Windows.Entry.WindowEntry;
 import Apps.TimeLog.Windows.Fields.NumberTextField;
+import javafx.geometry.Insets;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
+import lombok.Getter;
 
-public class MailEntry extends WindowEntry {
+public class MailEntry extends VBox {
 	private NumberTextField id = new NumberTextField();
 	private DatePicker date = new DatePicker();
 	private TextField to = new TextField("");
@@ -24,16 +28,18 @@ public class MailEntry extends WindowEntry {
 	private TextField attachment = new TextField("");
 	private TextArea body = new TextArea("");
 	private CheckBox sent = new CheckBox("Sent");
-	private Button sendBtn = new Button("Send");
-	private Mail mail = new Mail();
+	private @Getter Button sendBtn = new Button("Send");
+	private @Getter Button saveBtn = new Button("Save");
+	private GridPane grid = new GridPane();
 
-	public MailEntry() {
-		stage.setTitle("Mail");
+	@SuppressWarnings("unchecked")
+	public MailEntry(MailEntryControler mailEntryControler) {
+		saveBtn.setOnAction(mailEntryControler);
+		sendBtn.setOnAction(mailEntryControler);
+		setScene();
+	}
 
-		sendBtn.setOnAction(value -> {
-			sendEmail();
-		});
-
+	private void setScene() {
 		date.setValue(LocalDate.now());
 		id.setPrefWidth(50);
 		id.setMaxWidth(50);
@@ -42,12 +48,10 @@ public class MailEntry extends WindowEntry {
 		to.setMaxWidth(400);
 		cc.setMaxWidth(400);
 		bcc.setMaxWidth(400);
-
 		HBox hline = new HBox();
 		hline.setSpacing(15.0);
 		hline.getChildren().addAll(new Label("ID: "), id, new Label("Date: "), date, sent, new Label("Att.: "),
 				attachment);
-
 		grid.add(hline, 1, 0, 1, 1);
 		grid.add(new Label("To: "), 0, 1);
 		grid.add(to, 1, 1);
@@ -64,59 +68,37 @@ public class MailEntry extends WindowEntry {
 		id.setEditable(false);
 		sent.setSelected(false);
 		sent.setDisable(true);
-		stage.setWidth(800);
-		stage.setHeight(450);
+		grid.setVgap(4);
+		grid.setHgap(10);
+		grid.setPadding(new Insets(10, 10, 10, 10));
+		this.getChildren().add(grid);
 	}
 
-	private void sendEmail() {
-		SendMail sendMail = new SendMail();
-		if (sendMail.send(mail)) {
-			mail.setSent(true);
-			model.merge(mail);
-			model.refresh();
-			sendBtn.setDisable(true);
-			if (mail.getSourcetype() == "inv") {
-				Invoice invoice = model.getInvoice(mail.getSourceid());
-				invoice.setSent(true);
-				model.merge(invoice);
+	public void setMail(Mail mail) {
+		if (mail.getId() > 0) {
+			id.SetLong(mail.getId());
+			date.setValue(mail.getDate());
+			to.setText(mail.getToo());
+			cc.setText(mail.getCc());
+			bcc.setText(mail.getBcc());
+			subject.setText(mail.getSubject());
+			body.setText(mail.getBody());
+			sent.setSelected(mail.isSent());
+			attachment.setText(mail.getAttachment());
+			if (mail.isSent()) {
+				sendBtn.setDisable(true);
 			}
-			setMail(mail);
-			model.msg("eMail sent!");
-		} else
-			model.msgW("Failed to send email!");
+		}
 	}
 
-	@Override
-	void save() {
+	public void getMail(Mail mail) {
 		mail.setDate(date.getValue());
-		mail.setTo(to.getText());
+		mail.setToo(to.getText());
 		mail.setCc(cc.getText());
 		mail.setBcc(bcc.getText());
 		mail.setSubject(subject.getText());
 		mail.setBody(body.getText());
 		mail.setSent(sent.isSelected());
 		mail.setAttachment(attachment.getText());
-		if (id.getText() == null)
-			model.persist(mail);
-		else
-			model.merge(mail);
-		model.refresh();
-		setMail(mail);
-	}
-
-	public void setMail(Mail mail) {
-		this.mail = mail;
-		id.SetLong(mail.getId());
-		date.setValue(mail.getDate());
-		to.setText(mail.getTo());
-		cc.setText(mail.getCc());
-		bcc.setText(mail.getBcc());
-		subject.setText(mail.getSubject());
-		body.setText(mail.getBody());
-		sent.setSelected(mail.isSent());
-		attachment.setText(mail.getAttachment());
-		if (mail.isSent()) {
-			sendBtn.setDisable(true);
-		}
 	}
 }

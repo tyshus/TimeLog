@@ -5,7 +5,10 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.Persistence;
 
+import Apps.TimeLog.Company.Company;
 import Apps.TimeLog.Contact.Contact;
+import Apps.TimeLog.Invoice.Invoice;
+import Apps.TimeLog.Mail.Mail;
 import Apps.TimeLog.Tools.PropertyLoader;
 
 import java.io.File;

@@ -3,13 +3,16 @@ package Apps.TimeLog.Windows.Entry;
 import java.text.DecimalFormat;
 import java.time.LocalDate;
 
+import Apps.TimeLog.Company.CompanyList;
+import Apps.TimeLog.Company.CompanyListControler;
 import Apps.TimeLog.Contact.ContactListControler;
+import Apps.TimeLog.Invoice.InvoiceList;
+import Apps.TimeLog.Invoice.InvoiceListControler;
+import Apps.TimeLog.Mail.MailList;
+import Apps.TimeLog.Mail.MailListControler;
 import Apps.TimeLog.Models.Model;
 import Apps.TimeLog.Models.TimeLog;
 import Apps.TimeLog.Windows.Fields.NumberTextField;
-import Apps.TimeLog.Windows.List.CompanyList;
-import Apps.TimeLog.Windows.List.InvoiceList;
-import Apps.TimeLog.Windows.List.MailList;
 import Apps.TimeLog.Windows.List.Report;
 import javafx.application.Platform;
 import javafx.geometry.Insets;
@@ -70,13 +73,13 @@ public class LogEntry {
 				new ContactListControler();
 			});
 			menuItemCompanies.setOnAction(value -> {
-				new CompanyList();
+				new CompanyListControler();
 			});
 			menuItemInvoices.setOnAction(value -> {
-				new InvoiceList();
+				new InvoiceListControler();
 			});
 			menuItemMails.setOnAction(value -> {
-				new MailList();
+				new MailListControler();
 			});
 			menuItemReport.setOnAction(value -> {
 				new Report();

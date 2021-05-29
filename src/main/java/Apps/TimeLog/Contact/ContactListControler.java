@@ -21,9 +21,8 @@ public class ContactListControler implements EventHandler {
 		this.contactList = new ContactList(this);
 		this.loadData();
 		this.fillTable();
-		final Scene scene = new Scene(contactList, 500, 550);
 		this.stage.setTitle("Contact list");
-		this.stage.setScene(scene);
+		this.stage.setScene(new Scene(contactList, 500, 550));
 		this.stage.show();
 	}
 

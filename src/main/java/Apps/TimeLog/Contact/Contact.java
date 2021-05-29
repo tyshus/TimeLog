@@ -7,11 +7,14 @@ import javax.persistence.Id;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
 @Getter @Setter
+@NoArgsConstructor @AllArgsConstructor
 @ToString
 @Entity(name = "contacts")
 @Table(name = "contacts")
@@ -27,18 +30,4 @@ public class Contact {
 	private boolean active;
 	private boolean manager;
 
-	public Contact() {
-	}
-
-	public Contact(long id, String company, String name, String email, String emailtype, boolean active,
-			boolean manager) {
-		super();
-		this.id = id;
-		this.company = company;
-		this.name = name;
-		this.email = email;
-		this.emailtype = emailtype;
-		this.active = active;
-		this.manager = manager;
-	}
 }

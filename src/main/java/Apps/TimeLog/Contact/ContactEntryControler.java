@@ -12,15 +12,15 @@ public class ContactEntryControler implements EventHandler {
 	private Model model = Model.getModel();
 	private Contact contact;
 	private Stage stage;
-		
+
 	public ContactEntryControler(Contact contact) {
 		this.stage = new Stage();
 		this.contact = contact;
 		this.contactEntry = new ContactEntry(this);
-		this.setContact(contact);
-		final Scene scene = new Scene(contactEntry, 450, 250);
+		this.contactEntry.fillCompanies(model.loadCompanies());
+		this.contactEntry.setContact(contact);
 		this.stage.setTitle("Contact");
-		this.stage.setScene(scene);
+		this.stage.setScene(new Scene(contactEntry, 450, 250));
 		this.stage.show();
 	}
 
@@ -32,35 +32,13 @@ public class ContactEntryControler implements EventHandler {
 		}
 	}
 
-	public void setContact(Contact contact) {
-		this.contactEntry.setCompanies(this.model.loadCompanies());
-		if (contact == null) {
-			this.contactEntry.setDefaults();
-
-		} else {
-			this.contactEntry.setId(contact.getId());
-			this.contactEntry.setCompany(contact.getCompany());
-			this.contactEntry.setName(contact.getName());
-			this.contactEntry.setEmail(contact.getEmail());
-			this.contactEntry.setManager(contact.isManager());
-			this.contactEntry.setActive(contact.isActive());
-			this.contactEntry.setEmailtype(contact.getEmailtype());
-		}
-	}
-
 	private void save() {
-		this.contact.setName(contactEntry.getName().getText());
-		this.contact.setEmail(contactEntry.getEmail().getText());
-		this.contact.setActive(contactEntry.getActive().isSelected());
-		this.contact.setManager(contactEntry.getManager().isSelected());
-		this.contact.setCompany(contactEntry.getCompany().getValue());
-		this.contact.setEmailtype(contactEntry.getEmailtype().getValue());
+		contactEntry.getContact(contact);
 		if (contact.getId() <= 0) {
 			this.model.persist(this.contact);
 		} else {
 			this.model.merge(this.contact);
 		}
-		this.model.refresh();
 		this.stage.close();
 	}
 }

@@ -5,14 +5,16 @@ import java.text.DecimalFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
-import Apps.TimeLog.Models.Company;
-import Apps.TimeLog.Models.Invoice;
-import Apps.TimeLog.Models.Mail;
+import Apps.TimeLog.Company.Company;
+import Apps.TimeLog.Invoice.Invoice;
+import Apps.TimeLog.Invoice.InvoiceEntry;
+import Apps.TimeLog.Invoice.InvoiceEntryControler;
+import Apps.TimeLog.Mail.Mail;
+import Apps.TimeLog.Mail.MailEntry;
+import Apps.TimeLog.Mail.MailEntryControler;
 import Apps.TimeLog.Models.TimeLog;
 import Apps.TimeLog.Tools.ReportExcelExport;
-import Apps.TimeLog.Windows.Entry.InvoiceEntry;
 import Apps.TimeLog.Windows.Entry.LogEntry;
-import Apps.TimeLog.Windows.Entry.MailEntry;
 import javafx.geometry.Insets;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
@@ -102,7 +104,7 @@ public class Report extends WindowList {
 			mailbody.append(model.prop.getProperty("mail_greatings2"));
 
 			Mail mail = new Mail();
-			mail.setTo(model.getEmails(this.companyCBox.getValue(), "To"));
+			mail.setToo(model.getEmails(this.companyCBox.getValue(), "To"));
 			mail.setCc(model.getEmails(this.companyCBox.getValue(), "Cc"));
 			mail.setBcc(model.getEmails(this.companyCBox.getValue(), "Bcc"));
 			mail.setSourceid("");
@@ -111,16 +113,13 @@ public class Report extends WindowList {
 			mail.setBody(mailbody.toString());
 			mail.setAttachment(this.getPrintout());
 			mail.setDate(LocalDate.now());
-			model.persist(mail);
 
-			MailEntry mailEntry = new MailEntry();
-			mailEntry.setMail(mail);
+			new MailEntryControler(mail);
 			this.setPrintout("");
 		}
 	}
 
 	void creatInvoice() {
-		InvoiceEntry companyEntry = new InvoiceEntry();
 		Invoice invoice = new Invoice();
 		Company company = model.getCompany(companyCBox.getValue());
 		invoice.setDate(LocalDate.now());
@@ -129,7 +128,7 @@ public class Report extends WindowList {
 		invoice.setOperation(model.prop.getProperty("invoice_operation"));
 		invoice.setPeriod(dateFrom.getValue().format(DateTimeFormatter.ofPattern("yyyy.MM.dd")) + "-"
 				+ dateTo.getValue().format(DateTimeFormatter.ofPattern("yyyy.MM.dd")));
-		companyEntry.setInvoice(invoice);
+		new InvoiceEntryControler(invoice);
 	}
 
 	@Override
