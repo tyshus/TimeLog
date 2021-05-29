@@ -5,6 +5,7 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.Persistence;
 
+import Apps.TimeLog.Contact.Contact;
 import Apps.TimeLog.Tools.PropertyLoader;
 
 import java.io.File;

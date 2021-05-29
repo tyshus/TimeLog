@@ -11,6 +11,7 @@ import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 
 public abstract class WindowList {
+	
 	Stage stage = new Stage();
 	Button newBtn = new Button("New");
 	Button editBtn = new Button("Edit");

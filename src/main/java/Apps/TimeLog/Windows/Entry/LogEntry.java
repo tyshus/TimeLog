@@ -3,11 +3,11 @@ package Apps.TimeLog.Windows.Entry;
 import java.text.DecimalFormat;
 import java.time.LocalDate;
 
+import Apps.TimeLog.Contact.ContactListControler;
 import Apps.TimeLog.Models.Model;
 import Apps.TimeLog.Models.TimeLog;
 import Apps.TimeLog.Windows.Fields.NumberTextField;
 import Apps.TimeLog.Windows.List.CompanyList;
-import Apps.TimeLog.Windows.List.ContactList;
 import Apps.TimeLog.Windows.List.InvoiceList;
 import Apps.TimeLog.Windows.List.MailList;
 import Apps.TimeLog.Windows.List.Report;
@@ -67,7 +67,7 @@ public class LogEntry {
 			menuRgisters.getItems().addAll(menuItemInvoices, menuItemMails, menuItemContacts, menuItemCompanies);
 			menuBar.getMenus().addAll(menuFile, menuRgisters, menuReport);
 			menuItemContacts.setOnAction(value -> {
-				new ContactList();
+				new ContactListControler();
 			});
 			menuItemCompanies.setOnAction(value -> {
 				new CompanyList();
