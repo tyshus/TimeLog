@@ -12,3 +12,7 @@ src/main/resources/application.properties
 src/main/resources/application.properties
 *.xlsx
 src/main/resources/application.properties
+*.pdf
+*.properties
+*.properties
+*.properties

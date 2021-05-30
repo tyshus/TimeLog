@@ -2,20 +2,14 @@ package Apps.TimeLog.Mail;
 
 import java.util.List;
 
-import Apps.TimeLog.Mail.Mail;
-import Apps.TimeLog.Mail.MailEntryControler;
-import Apps.TimeLog.Mail.MailList;
-import Apps.TimeLog.Models.Model;
+import Apps.TimeLog.Tools.Model;
 import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.TableView;
-import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
-import lombok.Getter;
 import lombok.Setter;
 
+@SuppressWarnings("rawtypes")
 public class MailListControler implements EventHandler {
 	private final MailList mailList;
 	private @Setter List<Mail> list;
@@ -30,6 +24,7 @@ public class MailListControler implements EventHandler {
 		this.stage.setTitle("Mail list");
 		this.stage.setScene(new Scene(mailList, 500, 550));
 		this.stage.show();
+		this.stage.setWidth(700);
 	}
 
 	@Override
@@ -55,12 +50,12 @@ public class MailListControler implements EventHandler {
 			model.msgW("No Mail selected!");
 		}
 	}
-	
+
 	public void loadData() {
 		this.list = this.model.loadMailList();
 	}
-	
+
 	public void fillTable() {
-		this.mailList.filltableView(list);
+		this.mailList.fillTableView(list);
 	}
 }

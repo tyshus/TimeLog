@@ -15,7 +15,6 @@ import org.apache.poi.poifs.filesystem.POIFSFileSystem;
 
 import Apps.TimeLog.Company.Company;
 import Apps.TimeLog.Invoice.Invoice;
-import Apps.TimeLog.Models.Model;
 
 public class PrintInvoice {
 	Model model = Model.getModel();

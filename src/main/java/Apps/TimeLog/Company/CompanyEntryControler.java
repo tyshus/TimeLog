@@ -1,6 +1,6 @@
 package Apps.TimeLog.Company;
 
-import Apps.TimeLog.Models.Model;
+import Apps.TimeLog.Tools.Model;
 import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;

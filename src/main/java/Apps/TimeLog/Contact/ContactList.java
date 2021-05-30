@@ -46,7 +46,7 @@ public class ContactList extends VBox {
 		this.tableView.setId("table-view");
 	}
 
-	public void filltableView(List<Contact> list) {
+	public void fillTableView(List<Contact> list) {
 		this.tableView.getItems().clear();
 		this.tableView.getItems().addAll(list);
 	}

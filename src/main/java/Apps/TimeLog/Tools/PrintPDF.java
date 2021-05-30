@@ -9,9 +9,6 @@ import com.cloudmersive.client.invoker.ApiClient;
 import com.cloudmersive.client.invoker.ApiException;
 import com.cloudmersive.client.invoker.Configuration;
 import com.cloudmersive.client.invoker.auth.*;
-
-import Apps.TimeLog.Models.Model;
-
 import com.cloudmersive.client.ConvertDocumentApi;
 
 public class PrintPDF {

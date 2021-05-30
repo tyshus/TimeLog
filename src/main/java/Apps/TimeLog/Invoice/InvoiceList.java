@@ -52,7 +52,7 @@ public class InvoiceList extends VBox {
 		this.tableView.setId("table-view");
 	}
 
-	public void filltableView(List<Invoice> list) {
+	public void fillTableView(List<Invoice> list) {
 		this.tableView.getItems().clear();
 		this.tableView.getItems().addAll(list);
 	}

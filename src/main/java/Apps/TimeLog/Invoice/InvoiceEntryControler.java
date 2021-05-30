@@ -5,7 +5,7 @@ import java.time.LocalDate;
 import Apps.TimeLog.Mail.Mail;
 import Apps.TimeLog.Mail.MailEntry;
 import Apps.TimeLog.Mail.MailEntryControler;
-import Apps.TimeLog.Models.Model;
+import Apps.TimeLog.Tools.Model;
 import Apps.TimeLog.Tools.PrintInvoice;
 import javafx.event.Event;
 import javafx.event.EventHandler;
@@ -48,6 +48,7 @@ public class InvoiceEntryControler implements EventHandler {
 		invoiceEntry.getInvoice(invoice);
 		if (invoice.getSerno() == null) {
 			model.persist(invoice);
+			invoiceEntry.setInvoice(invoice);
 		} else {
 			model.merge(invoice);
 		}

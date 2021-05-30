@@ -1,4 +1,4 @@
-package Apps.TimeLog.Models;
+package Apps.TimeLog.Tools;
 
 import java.util.List;
 
@@ -9,11 +9,10 @@ import Apps.TimeLog.Company.Company;
 import Apps.TimeLog.Contact.Contact;
 import Apps.TimeLog.Invoice.Invoice;
 import Apps.TimeLog.Mail.Mail;
-import Apps.TimeLog.Tools.PropertyLoader;
+import Apps.TimeLog.TimeLog.TimeLog;
 
 import java.io.File;
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.Collections;
 
 import javafx.collections.FXCollections;
@@ -25,7 +24,6 @@ public class Model {
 	private static Model model = null;
 	public PropertyLoader prop = PropertyLoader.getInstance();
 	private static EntityManager em;
-	private List<Runnable> listRefreshCallbacks = new ArrayList<>();
 
 	private Model() {
 	}
@@ -168,19 +166,6 @@ public class Model {
 			observableList.add(temp.getId());
 		}
 		return observableList;
-	}
-
-	public Runnable addRefreshCallback(Runnable callback) {
-		listRefreshCallbacks.add(callback);
-		return listRefreshCallbacks.get(listRefreshCallbacks.size() - 1);
-	}
-
-	public void removeRefreshCallback(Runnable callback) {
-		listRefreshCallbacks.remove(callback);
-	}
-
-	public void refresh() {
-		listRefreshCallbacks.forEach(c -> c.run());
 	}
 
 	public void createDirectory(String directoryName) {

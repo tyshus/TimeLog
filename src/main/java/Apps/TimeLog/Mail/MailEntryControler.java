@@ -1,7 +1,7 @@
 package Apps.TimeLog.Mail;
 
 import Apps.TimeLog.Invoice.Invoice;
-import Apps.TimeLog.Models.Model;
+import Apps.TimeLog.Tools.Model;
 import Apps.TimeLog.Tools.SendMail;
 import javafx.event.Event;
 import javafx.event.EventHandler;
@@ -23,6 +23,8 @@ public class MailEntryControler implements EventHandler {
 		this.stage.setTitle("Mail");
 		this.stage.setScene(new Scene(mailEntry, 450, 250));
 		this.stage.show();
+		this.stage.setWidth(800);
+		this.stage.setHeight(500);
 	}
 
 	@Override
@@ -40,6 +42,7 @@ public class MailEntryControler implements EventHandler {
 		mailEntry.getMail(mail);
 		if (mail.getId() <= 0) {
 			model.persist(mail);
+			mailEntry.setMail(mail);
 		} else {
 			model.merge(mail);
 		}

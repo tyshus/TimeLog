@@ -2,9 +2,6 @@ package Apps.TimeLog.Mail;
 
 import java.time.LocalDate;
 
-import Apps.TimeLog.Invoice.Invoice;
-import Apps.TimeLog.Tools.SendMail;
-import Apps.TimeLog.Windows.Entry.WindowEntry;
 import Apps.TimeLog.Windows.Fields.NumberTextField;
 import javafx.geometry.Insets;
 import javafx.scene.control.Button;
@@ -62,8 +59,10 @@ public class MailEntry extends VBox {
 		grid.add(new Label("Subject: "), 0, 4);
 		grid.add(subject, 1, 4);
 		grid.add(body, 1, 5);
-		grid.add(saveBtn, 1, 6);
-		grid.add(sendBtn, 2, 6);
+		HBox bline = new HBox();
+		bline.setSpacing(15.0);
+		bline.getChildren().addAll(saveBtn, sendBtn);
+		grid.add(bline, 1, 6);
 
 		id.setEditable(false);
 		sent.setSelected(false);
@@ -75,19 +74,17 @@ public class MailEntry extends VBox {
 	}
 
 	public void setMail(Mail mail) {
-		if (mail.getId() > 0) {
-			id.SetLong(mail.getId());
-			date.setValue(mail.getDate());
-			to.setText(mail.getToo());
-			cc.setText(mail.getCc());
-			bcc.setText(mail.getBcc());
-			subject.setText(mail.getSubject());
-			body.setText(mail.getBody());
-			sent.setSelected(mail.isSent());
-			attachment.setText(mail.getAttachment());
-			if (mail.isSent()) {
-				sendBtn.setDisable(true);
-			}
+		id.SetLong(mail.getId());
+		date.setValue(mail.getDate());
+		to.setText(mail.getToo());
+		cc.setText(mail.getCc());
+		bcc.setText(mail.getBcc());
+		subject.setText(mail.getSubject());
+		body.setText(mail.getBody());
+		sent.setSelected(mail.isSent());
+		attachment.setText(mail.getAttachment());
+		if (mail.isSent()) {
+			sendBtn.setDisable(true);
 		}
 	}
 

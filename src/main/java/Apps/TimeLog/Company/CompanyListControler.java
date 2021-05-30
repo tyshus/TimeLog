@@ -2,7 +2,7 @@ package Apps.TimeLog.Company;
 
 import java.util.List;
 
-import Apps.TimeLog.Models.Model;
+import Apps.TimeLog.Tools.Model;
 import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
@@ -55,7 +55,7 @@ public class CompanyListControler implements EventHandler{
 	}
 
 	public void fillTable() {
-		this.companyList.filltableView(list);
+		this.companyList.fillTableView(list);
 	}
 
 }

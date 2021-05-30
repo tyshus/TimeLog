@@ -49,7 +49,7 @@ public class CompanyList extends VBox {
 		this.tableView.setId("table-view");
 	}
 
-	public void filltableView(List<Company> list) {
+	public void fillTableView(List<Company> list) {
 		this.tableView.getItems().clear();
 		this.tableView.getItems().addAll(list);
 	}

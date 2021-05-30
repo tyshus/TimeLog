@@ -1,6 +1,6 @@
 package Apps.TimeLog.Contact;
 
-import Apps.TimeLog.Models.Model;
+import Apps.TimeLog.Tools.Model;
 import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
@@ -35,10 +35,11 @@ public class ContactEntryControler implements EventHandler {
 	private void save() {
 		contactEntry.getContact(contact);
 		if (contact.getId() <= 0) {
-			this.model.persist(this.contact);
+			model.persist(contact);
+			contactEntry.setContact(contact);
 		} else {
-			this.model.merge(this.contact);
+			model.merge(contact);
 		}
-		this.stage.close();
+		stage.close();
 	}
 }

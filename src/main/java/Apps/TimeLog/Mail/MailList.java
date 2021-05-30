@@ -59,7 +59,7 @@ public class MailList extends VBox {
 		this.tableView.setId("table-view");
 	}
 
-	public void filltableView(List<Mail> list) {
+	public void fillTableView(List<Mail> list) {
 		this.tableView.getItems().clear();
 		this.tableView.getItems().addAll(list);
 	}

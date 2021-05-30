@@ -16,9 +16,8 @@ import org.apache.poi.xssf.usermodel.XSSFCellStyle;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
-import Apps.TimeLog.Models.Model;
-import Apps.TimeLog.Models.TimeLog;
-import Apps.TimeLog.Windows.List.Report;
+import Apps.TimeLog.TimeLog.Report;
+import Apps.TimeLog.TimeLog.TimeLog;
 import javafx.scene.control.TableColumnBase;
 import javafx.scene.control.TableView;
 

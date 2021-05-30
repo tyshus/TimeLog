@@ -26,7 +26,7 @@ import lombok.ToString;
 public class Invoice {
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "invoices_sequence")
-	@GenericGenerator(name = "invoices_sequence", strategy = "Apps.TimeLog.Models.StringPrefixedSequenceIdGenerator", parameters = {
+	@GenericGenerator(name = "invoices_sequence", strategy = "Apps.TimeLog.Invoice.StringPrefixedSequenceIdGenerator", parameters = {
 			@Parameter(name = StringPrefixedSequenceIdGenerator.INCREMENT_PARAM, value = "1"),
 			@Parameter(name = StringPrefixedSequenceIdGenerator.VALUE_PREFIX_PARAMETER, value = "PST_"),
 			@Parameter(name = StringPrefixedSequenceIdGenerator.NUMBER_FORMAT_PARAMETER, value = "%05d") })
