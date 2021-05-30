@@ -3,7 +3,6 @@ package Apps.TimeLog.Invoice;
 import java.time.LocalDate;
 
 import Apps.TimeLog.Mail.Mail;
-import Apps.TimeLog.Mail.MailEntry;
 import Apps.TimeLog.Mail.MailEntryControler;
 import Apps.TimeLog.Tools.Model;
 import Apps.TimeLog.Tools.PrintInvoice;

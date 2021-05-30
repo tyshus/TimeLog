@@ -10,8 +10,10 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
-@Getter @Setter
-@NoArgsConstructor @AllArgsConstructor
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 @ToString
 @Entity(name = "companies")
 @Table(name = "companies")
@@ -23,5 +25,5 @@ public class Company {
 	private String code;
 	private String vatRegNo;
 	private Double rate;
-	
+
 }

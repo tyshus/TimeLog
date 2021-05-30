@@ -16,16 +16,11 @@ public class PrintPDF {
 	public PrintPDF(String docFile, String filename) throws IOException {
 		Model model = Model.getModel();
 		ApiClient defaultClient = Configuration.getDefaultApiClient();
-
-		// Configure API key authorization: Apikey
 		ApiKeyAuth Apikey = (ApiKeyAuth) defaultClient.getAuthentication("Apikey");
 		Apikey.setApiKey(model.prop.getProperty("ptd_apikey"));
-		// Uncomment the following line to set a prefix for the API key, e.g. "Token"
-		// (defaults to null)
-		// Apikey.setApiKeyPrefix("Token");
 
 		ConvertDocumentApi apiInstance = new ConvertDocumentApi();
-		File inputFile = new File(docFile); // File | Input file to perform the operation on.
+		File inputFile = new File(docFile);
 		try {
 			byte[] result = apiInstance.convertDocumentDocxToPdf(inputFile);
 			FileUtils.writeByteArrayToFile(new File(filename), result);

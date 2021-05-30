@@ -4,7 +4,6 @@ import org.junit.Test;
 
 import javafx.application.Platform;
 import javafx.embed.swing.JFXPanel;
-import javafx.embed.swing.*;
 
 public class TestCompanyEntryControler {
 
@@ -18,7 +17,7 @@ public class TestCompanyEntryControler {
 				Platform.runLater(new Runnable() {
 					@Override
 					public void run() {
-						Company company = new Company("TEST","test company","address","122344","AA1233",10.0);
+						Company company = new Company("TEST", "test company", "address", "122344", "AA1233", 10.0);
 						new CompanyEntryControler(company);
 					}
 				});

@@ -9,7 +9,7 @@ public class App extends Application {
 	public void start(Stage stage) throws Exception {
 		new LogEntryControler(stage);
 	}
-	
+
 	public static void main(String[] args) {
 		launch(args);
 	}

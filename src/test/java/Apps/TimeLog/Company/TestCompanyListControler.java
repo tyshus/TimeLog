@@ -29,8 +29,8 @@ public class TestCompanyListControler {
 					public void run() {
 						CompanyListControler companyListControler = new CompanyListControler();
 						List<Company> list = new ArrayList<Company>();
-						list.add(new Company("TEST","test company","address","122344","AA1233",10.1));
-						list.add(new Company("TEST2","test2 company","address","22222","AA555",20.2));
+						list.add(new Company("TEST", "test company", "address", "122344", "AA1233", 10.1));
+						list.add(new Company("TEST2", "test2 company", "address", "22222", "AA555", 20.2));
 						companyListControler.setList(list);
 						companyListControler.fillTable();
 					}

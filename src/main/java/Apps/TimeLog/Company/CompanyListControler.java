@@ -10,12 +10,12 @@ import javafx.stage.Stage;
 import lombok.Setter;
 
 @SuppressWarnings("rawtypes")
-public class CompanyListControler implements EventHandler{
+public class CompanyListControler implements EventHandler {
 	private final CompanyList companyList;
 	private @Setter List<Company> list;
 	private Model model = Model.getModel();
 	private Stage stage;
-	
+
 	public CompanyListControler() {
 		stage = new Stage();
 		this.companyList = new CompanyList(this);
@@ -25,6 +25,7 @@ public class CompanyListControler implements EventHandler{
 		this.stage.setScene(new Scene(companyList, 500, 550));
 		this.stage.show();
 	}
+
 	@Override
 	public void handle(Event event) {
 		final Object source = event.getSource();
@@ -34,9 +35,9 @@ public class CompanyListControler implements EventHandler{
 		if (source.equals(this.companyList.getEditBtn())) {
 			editEntry();
 		}
-		
+
 	}
-	
+
 	void newEntry() {
 		new CompanyEntryControler(new Company());
 	}
@@ -49,7 +50,7 @@ public class CompanyListControler implements EventHandler{
 			model.msgW("No contact selected!");
 		}
 	}
-	
+
 	public void loadData() {
 		this.list = this.model.loadCompanyList();
 	}
