@@ -1,8 +1,6 @@
 package Apps.TimeLog.Contact;
 
 import org.junit.Test;
-import javafx.embed.swing.*;
-
 import javafx.application.Platform;
 import javafx.embed.swing.JFXPanel;
 

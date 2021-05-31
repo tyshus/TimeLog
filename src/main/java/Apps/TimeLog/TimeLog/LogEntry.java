@@ -3,17 +3,10 @@ package Apps.TimeLog.TimeLog;
 import java.text.DecimalFormat;
 import java.time.LocalDate;
 
-import Apps.TimeLog.Company.CompanyListControler;
-import Apps.TimeLog.Contact.ContactListControler;
-import Apps.TimeLog.Invoice.InvoiceListControler;
-import Apps.TimeLog.Mail.MailListControler;
-import Apps.TimeLog.Tools.Model;
 import Apps.TimeLog.Windows.Fields.NumberTextField;
-import javafx.application.Platform;
 import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
 import javafx.geometry.Orientation;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
@@ -26,7 +19,6 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
-import javafx.stage.Stage;
 import lombok.Getter;
 
 public class LogEntry extends VBox {
@@ -54,6 +46,7 @@ public class LogEntry extends VBox {
 		if (logEntryControler.isMainFlag()) {
 			setMenu(logEntryControler);
 		}
+		button.setOnAction(logEntryControler);
 		companyCBox.setOnAction(logEntryControler);
 		taskTypeCBox.getItems().addAll("Email", "Jira", "Skype", "Phone");
 		setGrid();

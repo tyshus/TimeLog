@@ -1,13 +1,13 @@
 package Apps.TimeLog.Contact;
 
 import java.util.ArrayList;
-import javafx.embed.swing.*;
 import java.util.List;
 
 import org.junit.Test;
 
 import javafx.application.Platform;
-import javafx.embed.swing.JFXPanel;
+//import javafx.embed.swing.JFXPanel;
+import javafx.embed.swing.*;
 
 public class TestContactListControler {
 
