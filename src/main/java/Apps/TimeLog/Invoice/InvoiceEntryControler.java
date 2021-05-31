@@ -17,6 +17,10 @@ public class InvoiceEntryControler implements EventHandler {
 	private Model model = Model.getModel();
 	private Invoice invoice;
 	private Stage stage;
+	
+	public InvoiceEntryControler() {
+		this.invoiceEntry = null;
+	}
 
 	public InvoiceEntryControler(Invoice invoice) {
 		this.stage = new Stage();
@@ -32,14 +36,14 @@ public class InvoiceEntryControler implements EventHandler {
 	@Override
 	public void handle(Event event) {
 		final Object source = event.getSource();
-		if (source.equals(this.invoiceEntry.getSaveBtn())) {
+		if (source.equals(invoiceEntry.getSaveBtn())) {
 			save();
 		}
-		if (source.equals(this.invoiceEntry.getPrintBtn())) {
-			print();
+		if (source.equals(invoiceEntry.getPrintBtn())) {
+			print(this.invoice);
 		}
-		if (source.equals(this.invoiceEntry.getMailBtn())) {
-			mail();
+		if (source.equals(invoiceEntry.getMailBtn())) {
+			mail(this.invoice);
 		}
 	}
 
@@ -53,7 +57,7 @@ public class InvoiceEntryControler implements EventHandler {
 		}
 	}
 
-	private void print() {
+	public void print(Invoice invoice) {
 		try {
 			new PrintInvoice(invoice);
 			invoiceEntry.setInvoice(invoice);
@@ -62,7 +66,7 @@ public class InvoiceEntryControler implements EventHandler {
 		}
 	}
 
-	private void mail() {
+	public void mail(Invoice invoice) {
 		StringBuilder mailbody = new StringBuilder();
 		mailbody.append(model.prop.getProperty("mail_greatings0"));
 		mailbody.append(System.getProperty("line.separator"));
