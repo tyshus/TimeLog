@@ -7,10 +7,10 @@ import org.junit.Test;
 import javafx.application.Platform;
 import javafx.embed.swing.JFXPanel;
 
-public class TestInvoiceEntryControler {
+public class TestInvoiceEntryController {
 
 	@Test
-	public void testInvoiceEntryControler() throws InterruptedException {
+	public void testInvoiceEntryController() throws InterruptedException {
 		Thread thread = new Thread(new Runnable() {
 
 			@Override
@@ -21,7 +21,7 @@ public class TestInvoiceEntryControler {
 					public void run() {
 						Invoice invoice = new Invoice("test", LocalDate.now(), "Company code", "invoice operaation",
 								"year 2021", 100.00, false, "", false);
-						new InvoiceEntryControler(invoice);
+						new InvoiceEntryController(invoice);
 					}
 				});
 			}

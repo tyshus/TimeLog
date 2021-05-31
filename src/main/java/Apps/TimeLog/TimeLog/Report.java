@@ -41,11 +41,11 @@ public class Report extends VBox {
 	private GridPane grid = new GridPane();
 
 	@SuppressWarnings("unchecked")
-	public Report(ReportControler reportControler) {
-		filterBtn.setOnAction(reportControler);
-		mailBtn.setOnAction(reportControler);
-		invoiceBtn.setOnAction(reportControler);
-		editBtn.setOnAction(reportControler);
+	public Report(ReportController reportController) {
+		filterBtn.setOnAction(reportController);
+		mailBtn.setOnAction(reportController);
+		invoiceBtn.setOnAction(reportController);
+		editBtn.setOnAction(reportController);
 		setScene();
 	}
 

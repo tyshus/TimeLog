@@ -7,13 +7,13 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 @SuppressWarnings("rawtypes")
-public class CompanyEntryControler implements EventHandler {
+public class CompanyEntryController implements EventHandler {
 	private final CompanyEntry companyEntry;
 	private Model model = Model.getModel();
 	private Company company;
 	private Stage stage;
 
-	public CompanyEntryControler(Company company) {
+	public CompanyEntryController(Company company) {
 		this.stage = new Stage();
 		this.company = company;
 		this.companyEntry = new CompanyEntry(this);

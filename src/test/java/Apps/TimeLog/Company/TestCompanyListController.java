@@ -9,16 +9,16 @@ import java.util.List;
 import org.junit.Test;
 
 import Apps.TimeLog.Contact.Contact;
-import Apps.TimeLog.Contact.ContactEntryControler;
-import Apps.TimeLog.Contact.ContactListControler;
+import Apps.TimeLog.Contact.ContactEntryController;
+import Apps.TimeLog.Contact.ContactListController;
 import javafx.application.Platform;
 import javafx.embed.swing.JFXPanel;
 
 @SuppressWarnings("unused")
-public class TestCompanyListControler {
+public class TestCompanyListController {
 
 	@Test
-	public void testCompanyListControler() throws InterruptedException {
+	public void testCompanyListController() throws InterruptedException {
 		Thread thread = new Thread(new Runnable() {
 
 			@Override
@@ -27,12 +27,12 @@ public class TestCompanyListControler {
 				Platform.runLater(new Runnable() {
 					@Override
 					public void run() {
-						CompanyListControler companyListControler = new CompanyListControler();
+						CompanyListController companyListController = new CompanyListController();
 						List<Company> list = new ArrayList<Company>();
 						list.add(new Company("TEST", "test company", "address", "122344", "AA1233", 10.1));
 						list.add(new Company("TEST2", "test2 company", "address", "22222", "AA555", 20.2));
-						companyListControler.setList(list);
-						companyListControler.fillTable();
+						companyListController.setList(list);
+						companyListController.fillTable();
 					}
 				});
 			}

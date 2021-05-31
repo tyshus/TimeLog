@@ -10,13 +10,13 @@ import javafx.stage.Stage;
 import lombok.Setter;
 
 @SuppressWarnings("rawtypes")
-public class InvoiceListControler implements EventHandler {
+public class InvoiceListController implements EventHandler {
 	private final InvoiceList invoiceList;
 	private @Setter List<Invoice> list;
 	private Model model = Model.getModel();
 	private Stage stage;
 
-	public InvoiceListControler() {
+	public InvoiceListController() {
 		stage = new Stage();
 		this.invoiceList = new InvoiceList(this);
 		this.loadData();
@@ -38,13 +38,13 @@ public class InvoiceListControler implements EventHandler {
 	}
 
 	void newEntry() {
-		new InvoiceEntryControler(new Invoice());
+		new InvoiceEntryController(new Invoice());
 	}
 
 	void editEntry() {
 		Invoice invoice = (Invoice) this.invoiceList.getTableView().getSelectionModel().getSelectedItem();
 		if (invoice != null) {
-			new InvoiceEntryControler(invoice);
+			new InvoiceEntryController(invoice);
 		} else {
 			model.msgW("No Invoice selected!");
 		}

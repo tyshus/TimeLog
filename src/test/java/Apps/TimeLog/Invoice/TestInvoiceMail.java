@@ -21,7 +21,7 @@ public class TestInvoiceMail {
 					public void run() {
 						Invoice invoice = new Invoice("test", LocalDate.now(), "Company code", "invoice operaation",
 								"year 2021", 100.00, false, "", false);
-						new InvoiceEntryControler().mail(invoice);
+						new InvoiceEntryController().mail(invoice);
 					}
 				});
 			}

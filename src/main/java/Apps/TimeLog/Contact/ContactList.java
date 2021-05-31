@@ -22,9 +22,9 @@ public class ContactList extends VBox {
 	private GridPane grid = new GridPane();
 
 	@SuppressWarnings("unchecked")
-	public ContactList(ContactListControler contactListControler) {
-		newBtn.setOnAction(contactListControler);
-		editBtn.setOnAction(contactListControler);
+	public ContactList(ContactListController contactListController) {
+		newBtn.setOnAction(contactListController);
+		editBtn.setOnAction(contactListController);
 		this.setScene();
 	}
 

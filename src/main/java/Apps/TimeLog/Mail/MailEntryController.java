@@ -9,13 +9,13 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 @SuppressWarnings("rawtypes")
-public class MailEntryControler implements EventHandler {
+public class MailEntryController implements EventHandler {
 	private final MailEntry mailEntry;
 	private Model model = Model.getModel();
 	private Mail mail;
 	private Stage stage;
 
-	public MailEntryControler(Mail mail) {
+	public MailEntryController(Mail mail) {
 		this.stage = new Stage();
 		this.mail = mail;
 		this.mailEntry = new MailEntry(this);

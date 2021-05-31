@@ -7,13 +7,13 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 @SuppressWarnings("rawtypes")
-public class ContactEntryControler implements EventHandler {
+public class ContactEntryController implements EventHandler {
 	private final ContactEntry contactEntry;
 	private Model model = Model.getModel();
 	private Contact contact;
 	private Stage stage;
 
-	public ContactEntryControler(Contact contact) {
+	public ContactEntryController(Contact contact) {
 		this.stage = new Stage();
 		this.contact = contact;
 		this.contactEntry = new ContactEntry(this);

@@ -23,9 +23,9 @@ public class CompanyList extends VBox {
 	private GridPane grid = new GridPane();
 
 	@SuppressWarnings("unchecked")
-	public CompanyList(CompanyListControler companyListControler) {
-		newBtn.setOnAction(companyListControler);
-		editBtn.setOnAction(companyListControler);
+	public CompanyList(CompanyListController companyListController) {
+		newBtn.setOnAction(companyListController);
+		editBtn.setOnAction(companyListController);
 		this.setScene();
 	}
 

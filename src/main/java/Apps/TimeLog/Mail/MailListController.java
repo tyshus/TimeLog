@@ -10,13 +10,13 @@ import javafx.stage.Stage;
 import lombok.Setter;
 
 @SuppressWarnings("rawtypes")
-public class MailListControler implements EventHandler {
+public class MailListController implements EventHandler {
 	private final MailList mailList;
 	private @Setter List<Mail> list;
 	private Model model = Model.getModel();
 	private Stage stage;
 
-	public MailListControler() {
+	public MailListController() {
 		stage = new Stage();
 		this.mailList = new MailList(this);
 		this.loadData();
@@ -39,13 +39,13 @@ public class MailListControler implements EventHandler {
 	}
 
 	void newEntry() {
-		new MailEntryControler(new Mail());
+		new MailEntryController(new Mail());
 	}
 
 	void editEntry() {
 		Mail mail = (Mail) this.mailList.getTableView().getSelectionModel().getSelectedItem();
 		if (mail != null) {
-			new MailEntryControler(mail);
+			new MailEntryController(mail);
 		} else {
 			model.msgW("No Mail selected!");
 		}

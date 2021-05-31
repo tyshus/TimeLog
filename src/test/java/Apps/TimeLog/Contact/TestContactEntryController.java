@@ -1,14 +1,13 @@
-package Apps.TimeLog.Company;
+package Apps.TimeLog.Contact;
 
 import org.junit.Test;
-
 import javafx.application.Platform;
 import javafx.embed.swing.JFXPanel;
 
-public class TestCompanyEntryControler {
+public class TestContactEntryController {
 
 	@Test
-	public void testCompanyEntryControler() throws InterruptedException {
+	public void testContactEntryController() throws InterruptedException {
 		Thread thread = new Thread(new Runnable() {
 
 			@Override
@@ -17,8 +16,9 @@ public class TestCompanyEntryControler {
 				Platform.runLater(new Runnable() {
 					@Override
 					public void run() {
-						Company company = new Company("TEST", "test company", "address", "122344", "AA1233", 10.0);
-						new CompanyEntryControler(company);
+						Contact contact = new Contact(1, "test company", "test name", "test@mail.com", "cc", true,
+								true);
+						new ContactEntryController(contact);
 					}
 				});
 			}
@@ -26,5 +26,4 @@ public class TestCompanyEntryControler {
 		thread.start();
 		Thread.sleep(10000);
 	}
-
 }

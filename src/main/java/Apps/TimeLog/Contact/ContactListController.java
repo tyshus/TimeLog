@@ -10,13 +10,13 @@ import javafx.stage.Stage;
 import lombok.Setter;
 
 @SuppressWarnings("rawtypes")
-public class ContactListControler implements EventHandler {
+public class ContactListController implements EventHandler {
 	private final ContactList contactList;
 	private @Setter List<Contact> list;
 	private Model model = Model.getModel();
 	private Stage stage;
 
-	public ContactListControler() {
+	public ContactListController() {
 		stage = new Stage();
 		this.contactList = new ContactList(this);
 		this.loadData();
@@ -38,13 +38,13 @@ public class ContactListControler implements EventHandler {
 	}
 
 	void newEntry() {
-		new ContactEntryControler(new Contact());
+		new ContactEntryController(new Contact());
 	}
 
 	void editEntry() {
 		Contact contact = (Contact) this.contactList.getTableView().getSelectionModel().getSelectedItem();
 		if (contact != null) {
-			new ContactEntryControler(contact);
+			new ContactEntryController(contact);
 		} else {
 			model.msgW("No contact selected!");
 		}

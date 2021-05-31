@@ -1,8 +1,8 @@
 package Apps.TimeLog.TimeLog;
 
-import Apps.TimeLog.Contact.ContactListControler;
-import Apps.TimeLog.Invoice.InvoiceListControler;
-import Apps.TimeLog.Mail.MailListControler;
+import Apps.TimeLog.Contact.ContactListController;
+import Apps.TimeLog.Invoice.InvoiceListController;
+import Apps.TimeLog.Mail.MailListController;
 import Apps.TimeLog.Tools.Model;
 import javafx.application.Platform;
 import javafx.event.Event;
@@ -12,14 +12,14 @@ import javafx.stage.Stage;
 import lombok.Getter;
 
 @SuppressWarnings("rawtypes")
-public class LogEntryControler implements EventHandler {
+public class LogEntryController implements EventHandler {
 	private LogEntry logEntry;
 	private Model model = Model.getModel();
 	private TimeLog timeLog;
 	private Stage stage;
 	private @Getter boolean mainFlag;
 
-	public LogEntryControler(TimeLog timeLog) {
+	public LogEntryController(TimeLog timeLog) {
 		this.stage = new Stage();
 		this.mainFlag = false;
 		this.stage.setTitle("Time Log");
@@ -28,7 +28,7 @@ public class LogEntryControler implements EventHandler {
 		this.logEntry.setTimeLog(timeLog);
 	}
 
-	public LogEntryControler(Stage mainstage) {
+	public LogEntryController(Stage mainstage) {
 		this.stage = mainstage;
 		this.mainFlag = true;
 		this.stage.setTitle("Time entry app");
@@ -57,16 +57,16 @@ public class LogEntryControler implements EventHandler {
 			this.logEntry.fillContacts(model.loadContacts(logEntry.getCompany()));
 		}
 		if (source.equals(this.logEntry.getMenuItemContacts())) {
-			new ContactListControler();
+			new ContactListController();
 		}
 		if (source.equals(this.logEntry.getMenuItemInvoices())) {
-			new InvoiceListControler();
+			new InvoiceListController();
 		}
 		if (source.equals(this.logEntry.getMenuItemMails())) {
-			new MailListControler();
+			new MailListController();
 		}
 		if (source.equals(this.logEntry.getMenuItemReport())) {
-			new ReportControler();
+			new ReportController();
 		}
 		if (source.equals(this.logEntry.getMenuItemQuit())) {
 			Platform.exit();

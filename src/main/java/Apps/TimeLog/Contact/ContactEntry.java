@@ -24,8 +24,8 @@ public class ContactEntry extends VBox {
 	private GridPane grid = new GridPane();
 
 	@SuppressWarnings("unchecked")
-	public ContactEntry(ContactEntryControler contactEntryControler) {
-		saveBtn.setOnAction(contactEntryControler);
+	public ContactEntry(ContactEntryController contactEntryController) {
+		saveBtn.setOnAction(contactEntryController);
 		this.setScene();
 	}
 

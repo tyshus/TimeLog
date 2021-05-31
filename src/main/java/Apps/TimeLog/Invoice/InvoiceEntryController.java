@@ -3,7 +3,7 @@ package Apps.TimeLog.Invoice;
 import java.time.LocalDate;
 
 import Apps.TimeLog.Mail.Mail;
-import Apps.TimeLog.Mail.MailEntryControler;
+import Apps.TimeLog.Mail.MailEntryController;
 import Apps.TimeLog.Tools.Model;
 import Apps.TimeLog.Tools.PrintInvoice;
 import javafx.event.Event;
@@ -12,17 +12,17 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 @SuppressWarnings("rawtypes")
-public class InvoiceEntryControler implements EventHandler {
+public class InvoiceEntryController implements EventHandler {
 	private final InvoiceEntry invoiceEntry;
 	private Model model = Model.getModel();
 	private Invoice invoice;
 	private Stage stage;
 	
-	public InvoiceEntryControler() {
+	public InvoiceEntryController() {
 		this.invoiceEntry = null;
 	}
 
-	public InvoiceEntryControler(Invoice invoice) {
+	public InvoiceEntryController(Invoice invoice) {
 		this.stage = new Stage();
 		this.invoice = invoice;
 		this.invoiceEntry = new InvoiceEntry(this);
@@ -90,7 +90,7 @@ public class InvoiceEntryControler implements EventHandler {
 		mail.setAttachment(invoice.getPrintout());
 		mail.setDate(LocalDate.now());
 
-		new MailEntryControler(mail);
+		new MailEntryController(mail);
 		stage.close();
 	}
 

@@ -25,9 +25,9 @@ public class InvoiceList extends VBox {
 	private GridPane grid = new GridPane();
 
 	@SuppressWarnings("unchecked")
-	public InvoiceList(InvoiceListControler invoiceListControler) {
-		newBtn.setOnAction(invoiceListControler);
-		editBtn.setOnAction(invoiceListControler);
+	public InvoiceList(InvoiceListController invoiceListController) {
+		newBtn.setOnAction(invoiceListController);
+		editBtn.setOnAction(invoiceListController);
 		setScene();
 	}
 

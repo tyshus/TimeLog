@@ -42,18 +42,18 @@ public class LogEntry extends VBox {
 	private GridPane grid = new GridPane();
 
 	@SuppressWarnings("unchecked")
-	public LogEntry(LogEntryControler logEntryControler) {
-		if (logEntryControler.isMainFlag()) {
-			setMenu(logEntryControler);
+	public LogEntry(LogEntryController logEntryController) {
+		if (logEntryController.isMainFlag()) {
+			setMenu(logEntryController);
 		}
-		button.setOnAction(logEntryControler);
-		companyCBox.setOnAction(logEntryControler);
+		button.setOnAction(logEntryController);
+		companyCBox.setOnAction(logEntryController);
 		taskTypeCBox.getItems().addAll("Email", "Jira", "Skype", "Phone");
 		setGrid();
 	}
 
 	@SuppressWarnings("unchecked")
-	private void setMenu(LogEntryControler logEntryControler) {
+	private void setMenu(LogEntryController logEntryController) {
 		MenuBar menuBar = new MenuBar();
 		Menu menuFile = new Menu("File");
 		Menu menuRgisters = new Menu("Rgisters");
@@ -62,12 +62,12 @@ public class LogEntry extends VBox {
 		menuReport.getItems().addAll(menuItemReport);
 		menuRgisters.getItems().addAll(menuItemInvoices, menuItemMails, menuItemContacts, menuItemCompanies);
 		menuBar.getMenus().addAll(menuFile, menuRgisters, menuReport);
-		menuItemCompanies.setOnAction(logEntryControler);
-		menuItemInvoices.setOnAction(logEntryControler);
-		menuItemMails.setOnAction(logEntryControler);
-		menuItemReport.setOnAction(logEntryControler);
-		menuItemQuit.setOnAction(logEntryControler);
-		menuItemContacts.setOnAction(logEntryControler);
+		menuItemCompanies.setOnAction(logEntryController);
+		menuItemInvoices.setOnAction(logEntryController);
+		menuItemMails.setOnAction(logEntryController);
+		menuItemReport.setOnAction(logEntryController);
+		menuItemQuit.setOnAction(logEntryController);
+		menuItemContacts.setOnAction(logEntryController);
 		this.getChildren().add(menuBar);
 	}
 

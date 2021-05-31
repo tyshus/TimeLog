@@ -31,10 +31,10 @@ public class InvoiceEntry extends VBox {
 	private GridPane grid = new GridPane();
 
 	@SuppressWarnings("unchecked")
-	public InvoiceEntry(InvoiceEntryControler invoiceEntryControler) {
-		saveBtn.setOnAction(invoiceEntryControler);
-		printBtn.setOnAction(invoiceEntryControler);
-		mailBtn.setOnAction(invoiceEntryControler);
+	public InvoiceEntry(InvoiceEntryController invoiceEntryController) {
+		saveBtn.setOnAction(invoiceEntryController);
+		printBtn.setOnAction(invoiceEntryController);
+		mailBtn.setOnAction(invoiceEntryController);
 		this.setScene();
 	}
 

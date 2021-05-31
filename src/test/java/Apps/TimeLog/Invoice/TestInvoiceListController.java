@@ -9,10 +9,10 @@ import org.junit.Test;
 import javafx.application.Platform;
 import javafx.embed.swing.JFXPanel;
 
-public class TestInvoiceListControler {
+public class TestInvoiceListController {
 
 	@Test
-	public void testInvoiceListControler() throws InterruptedException {
+	public void testInvoiceListController() throws InterruptedException {
 		Thread thread = new Thread(new Runnable() {
 
 			@Override
@@ -21,14 +21,14 @@ public class TestInvoiceListControler {
 				Platform.runLater(new Runnable() {
 					@Override
 					public void run() {
-						InvoiceListControler invoiceListControler = new InvoiceListControler();
+						InvoiceListController invoiceListController = new InvoiceListController();
 						List<Invoice> list = new ArrayList<Invoice>();
 						list.add(new Invoice("test1", LocalDate.now(), "Company1", "invoice operaation1", "year 2020",
 								100.00, false, "", false));
 						list.add(new Invoice("test2", LocalDate.now(), "Company2", "invoice operaation1", "year 2022",
 								200.00, false, "", false));
-						invoiceListControler.setList(list);
-						invoiceListControler.fillTable();
+						invoiceListController.setList(list);
+						invoiceListController.fillTable();
 					}
 				});
 			}

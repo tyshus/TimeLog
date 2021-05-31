@@ -7,9 +7,9 @@ import java.util.List;
 
 import Apps.TimeLog.Company.Company;
 import Apps.TimeLog.Invoice.Invoice;
-import Apps.TimeLog.Invoice.InvoiceEntryControler;
+import Apps.TimeLog.Invoice.InvoiceEntryController;
 import Apps.TimeLog.Mail.Mail;
-import Apps.TimeLog.Mail.MailEntryControler;
+import Apps.TimeLog.Mail.MailEntryController;
 import Apps.TimeLog.Tools.Model;
 import Apps.TimeLog.Tools.ReportExcelExport;
 import javafx.event.Event;
@@ -19,13 +19,13 @@ import javafx.stage.Stage;
 import lombok.Setter;
 
 @SuppressWarnings("rawtypes")
-public class ReportControler implements EventHandler {
+public class ReportController implements EventHandler {
 	private final Report report;
 	private @Setter List<TimeLog> list;
 	private Model model = Model.getModel();
 	private Stage stage;
 
-	public ReportControler() {
+	public ReportController() {
 		stage = new Stage();
 		report = new Report(this);
 		report.fillCompanies(model.loadCompanies());
@@ -57,7 +57,7 @@ public class ReportControler implements EventHandler {
 	void editEntry() {
 		TimeLog timeLog = (TimeLog) report.getTableView().getSelectionModel().getSelectedItem();
 		if (timeLog != null) {
-			new LogEntryControler(timeLog);
+			new LogEntryController(timeLog);
 		} else {
 			model.msgW("No log selected!");
 		}
@@ -99,7 +99,7 @@ public class ReportControler implements EventHandler {
 			mail.setAttachment(report.getPrintout());
 			mail.setDate(LocalDate.now());
 
-			new MailEntryControler(mail);
+			new MailEntryController(mail);
 			report.setPrintout("");
 		}
 	}
@@ -113,6 +113,6 @@ public class ReportControler implements EventHandler {
 		invoice.setOperation(model.prop.getProperty("invoice_operation"));
 		invoice.setPeriod(report.getDateFrom().format(DateTimeFormatter.ofPattern("yyyy.MM.dd")) + "-"
 				+ report.getDateTo().format(DateTimeFormatter.ofPattern("yyyy.MM.dd")));
-		new InvoiceEntryControler(invoice);
+		new InvoiceEntryController(invoice);
 	}
 }

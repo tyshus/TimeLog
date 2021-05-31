@@ -30,9 +30,9 @@ public class MailEntry extends VBox {
 	private GridPane grid = new GridPane();
 
 	@SuppressWarnings("unchecked")
-	public MailEntry(MailEntryControler mailEntryControler) {
-		saveBtn.setOnAction(mailEntryControler);
-		sendBtn.setOnAction(mailEntryControler);
+	public MailEntry(MailEntryController mailEntryController) {
+		saveBtn.setOnAction(mailEntryController);
+		sendBtn.setOnAction(mailEntryController);
 		setScene();
 	}
 

@@ -25,9 +25,9 @@ public class MailList extends VBox {
 	private GridPane grid = new GridPane();
 
 	@SuppressWarnings("unchecked")
-	public MailList(MailListControler mailListControler) {
-		newBtn.setOnAction(mailListControler);
-		editBtn.setOnAction(mailListControler);
+	public MailList(MailListController mailListController) {
+		newBtn.setOnAction(mailListController);
+		editBtn.setOnAction(mailListController);
 		setScene();
 	}
 
