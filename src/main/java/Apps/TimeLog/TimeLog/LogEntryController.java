@@ -75,13 +75,15 @@ public class LogEntryController implements EventHandler {
 
 	}
 
-	private void save() {
-		logEntry.getTimeLog(timeLog);
+	private void save() {	
 		if (timeLog.getId() <= 0) {
-			model.persist(timeLog);
+			TimeLog tempTimeLog = new TimeLog();
+			logEntry.getTimeLog(tempTimeLog);
+			model.persist(tempTimeLog);
 			logEntry.setDefaults();
-			model.msg("Time: " + String.valueOf(timeLog.getTime()));
+			model.msg("Time: " + String.valueOf(tempTimeLog.getTime()));
 		} else {
+			logEntry.getTimeLog(timeLog);
 			model.merge(timeLog);
 			stage.close();
 		}
