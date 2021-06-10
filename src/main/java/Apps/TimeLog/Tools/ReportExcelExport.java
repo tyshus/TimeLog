@@ -74,15 +74,35 @@ public class ReportExcelExport {
 		Font longTextFont = workbook.createFont();
 		longTextStyle.setFont(longTextFont);
 
-		Row row = sheet.createRow(0);
+		int i = 0;
+		for (i = 0; i < 3; i++) {
+			Row row = sheet.createRow(i);
+			for (int j = 0; j < 3; j++) {
+				XSSFCell cell = (XSSFCell) row.createCell(j);
+				if (i == 0 && j == 0) {
+					cell.setCellValue("Name, Surename:");
+				} else if ((i == 0 && j == 1)) {
+					cell.setCellValue(model.prop.getProperty("mail_greatings2"));
+				} else if ((i == 1 && j == 0)) {
+					cell.setCellValue("Period:");
+				} else if ((i == 1 && j == 1)) {
+					cell.setCellValue(report.getDateFrom().format(DateTimeFormatter.ofPattern("yyyy.MM.dd")) + "-"
+							+ report.getDateTo().format(DateTimeFormatter.ofPattern("yyyy.MM.dd")));
+				}
+				cell.setCellStyle(headerStyle);
+			}
+		}
+
+		i = 2;
+		Row row = sheet.createRow(i);
 		for (int j = 0; j < tableView.getColumns().size(); j++) {
 			XSSFCell cell = (XSSFCell) row.createCell(j);
 			cell.setCellValue(((TableColumnBase<TimeLog, String>) tableView.getColumns().get(j)).getText());
 			cell.setCellStyle(headerStyle);
 		}
-		int i = 0;
+		i = 3;
 		for (TimeLog timeLog : tableView.getItems()) {
-			row = sheet.createRow(i + 1);
+			row = sheet.createRow(i);
 			for (int j = 0; j < tableView.getColumns().size(); j++) {
 				XSSFCell cell = (XSSFCell) row.createCell(j);
 				cell.setCellStyle(textStyle);
@@ -123,7 +143,18 @@ public class ReportExcelExport {
 			i++;
 		}
 
-		for (int j = 1; j < 10; j++) {
+		Row rowTotal = sheet.createRow(i + 1);
+		for (int j = 0; j < 3; j++) {
+			XSSFCell cell = (XSSFCell) rowTotal.createCell(j);
+			if (j == 0) {
+				cell.setCellValue("Total hours:");
+			} else if (j == 1) {
+				cell.setCellValue(String.valueOf(report.getTotalHours()));
+			}
+			cell.setCellStyle(headerStyle);
+		}
+
+		for (int j = 0; j < 10; j++) {
 			sheet.autoSizeColumn(j);
 		}
 		try {
