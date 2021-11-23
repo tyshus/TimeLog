@@ -1,25 +1,19 @@
 package Apps.TimeLog.Tools;
 
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.time.format.DateTimeFormatter;
-
-import org.apache.poi.ss.usermodel.DataFormat;
-import org.apache.poi.ss.usermodel.Font;
-import org.apache.poi.ss.usermodel.HorizontalAlignment;
-import org.apache.poi.ss.usermodel.IndexedColors;
-import org.apache.poi.ss.usermodel.Row;
-import org.apache.poi.ss.usermodel.VerticalAlignment;
+import Apps.TimeLog.TimeLog.Report;
+import Apps.TimeLog.TimeLog.TimeLog;
+import javafx.scene.control.TableColumnBase;
+import javafx.scene.control.TableView;
+import org.apache.poi.ss.usermodel.*;
 import org.apache.poi.xssf.usermodel.XSSFCell;
 import org.apache.poi.xssf.usermodel.XSSFCellStyle;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
-import Apps.TimeLog.TimeLog.Report;
-import Apps.TimeLog.TimeLog.TimeLog;
-import javafx.scene.control.TableColumnBase;
-import javafx.scene.control.TableView;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.time.format.DateTimeFormatter;
 
 public class ReportExcelExport {
 	private String pth, xlsx_file;
